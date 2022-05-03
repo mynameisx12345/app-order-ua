@@ -1,0 +1,59 @@
+.hot-today{
+  width:100%;
+  height:auto;
+  background: rgb(255, 215, 64);
+  padding: 10px;
+  .header{
+    height:40px;
+    font-size:20px;
+  }
+
+  .products{
+    height:290px;
+    width:178px;
+    background: white;
+    padding:5px;
+    margin: 5px;
+    border-radius:5px;
+    overflow: hidden;
+    position: relative;
+
+    .title{
+      word-wrap: break-word;
+      max-height: 75px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      text-overflow: ellipsis;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+    }
+
+    .price{
+      color: orange;
+      font-size: 15px;
+    }
+
+    .toolbar{
+      position:absolute; 
+      top: 0; 
+      right: 0; 
+      background: orange; 
+      height: auto;
+      width: 70px; 
+      opacity: 70%;
+      visibility: hidden;
+      border-bottom-left-radius: 10px;
+      overflow: hidden;
+    }
+  }
+
+  .products:hover {
+    box-shadow: rgba(0, 0, 0, 0.22) 0px 15px 15px;
+    transform: translate3d(0px, -1px, 0px);
+
+    .toolbar{
+      visibility: visible;
+    }
+  }
+}

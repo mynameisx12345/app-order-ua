@@ -1,0 +1,23 @@
+
+
+.header{
+  height: 100px;
+  margin-top: 20px;
+  width: 100%;
+
+  ::ng-deep .mat-form-field-wrapper{
+    margin-bottom: -1.25em !important;
+  }
+
+  .icon-cart{
+    font-size: 27px;
+  }
+
+  .upper-link{
+    cursor: pointer;
+  }
+
+  .upper-link:hover{
+    color: #b1b1b1;
+  }
+}
