@@ -6,7 +6,21 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./display-categories.component.scss']
 })
 export class DisplayCategoriesComponent implements OnInit {
-
+  categories = [
+    {img: '#', name: 'Category'},
+    {img: '#', name: 'Category'},
+    {img: '#', name: 'Category'},
+    {img: '#', name: 'Category'},
+    {img: '#', name: 'Category'},
+    {img: '#', name: 'Category'},
+    {img: '#', name: 'Category'},
+    {img: '#', name: 'Category'},
+    {img: '#', name: 'Category'},
+    {img: '#', name: 'Category'},
+    {img: '#', name: 'Category'},
+    {img: '#', name: 'Category'},
+    {img: '#', name: 'Category'},
+  ]
   constructor() { }
 
   ngOnInit(): void {

@@ -9,6 +9,16 @@
   }
 
   .products{
-    
+    .product{
+      border: 1px solid #ddd;
+      height: 170px;
+      width: 150px;
+      cursor: pointer;
+    }
+
+    .product:hover{
+      box-shadow: rgba(0, 0, 0, 0.22) 0px 5px 5px;
+      transform: translate3d(0px, -1px, 0px);
+    }
   }
 }
