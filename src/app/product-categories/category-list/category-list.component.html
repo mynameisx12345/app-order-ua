@@ -1,0 +1,9 @@
+<mat-selection-list #category [multiple]="false"
+  (selectionChange)="selectionChangeA($event)">
+  <mat-list-option *ngFor="let category of categories$ | async" [value]="category.id"
+    [selected]="category.id === selectedCategoryId.value"
+    >
+    {{category.name}}
+    <div></div>
+  </mat-list-option>
+</mat-selection-list>
