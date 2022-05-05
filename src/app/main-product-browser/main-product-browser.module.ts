@@ -6,6 +6,8 @@ import { CoreModule } from '../core/core.module';
 import { HotTodayComponent } from './hot-today/hot-today.component';
 import { MyFavoritesComponent } from './my-favorites/my-favorites.component';
 import { DisplayCategoriesComponent } from './display-categories/display-categories.component';
+import { HttpClientModule } from '@angular/common/http';
+import { MainProductBrowserRoutingModule } from './main-product-browser-routing.module';
 
 @NgModule({
   declarations: [
@@ -17,10 +19,13 @@ import { DisplayCategoriesComponent } from './display-categories/display-categor
   ],
   imports: [
     CommonModule,
-    CoreModule
+    CoreModule,
+    HttpClientModule,
+    MainProductBrowserRoutingModule
   ],
   exports: [
-    MainProductBrowserComponent
+    MainProductBrowserComponent,
+    HeaderComponent
   ]
 })
 export class MainProductBrowserModule { }

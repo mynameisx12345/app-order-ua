@@ -6,17 +6,24 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MainProductBrowserModule} from './main-product-browser/main-product-browser.module';
 import { CoreModule } from './core/core.module';
+import { AppMainModule } from './app-main/app-main.module';
+import { RouterModule } from '@angular/router';
+import { ProductCategoriesModule } from './product-categories/product-categories.module';
+
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     MainProductBrowserModule,
-    MainProductBrowserModule,
-    CoreModule
+    ProductCategoriesModule,
+    CoreModule,
+    AppMainModule,
+    RouterModule,
+    
   ],
   providers: [],
   bootstrap: [AppComponent]

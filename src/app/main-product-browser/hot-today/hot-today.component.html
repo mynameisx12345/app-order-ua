@@ -3,25 +3,7 @@
     Hot Today
   </div>
   <div fxLayout="row wrap" fxLayoutAlign="center start">
-    <div *ngFor="let prod of hotProducts" fxLayout="column" class="products">
-      <img src="#" width="100%" height="188px">
-      <div fxLayout="column">
-        <span class="title">{{prod.name}}</span>
-        <span class="price">Php {{prod.price}}</span>
-      </div>
-      <div class="toolbar" fxLayout="column">
-        <button mat-button>
-          <mat-icon>add_shopping_cart</mat-icon>
-        </button>
-        <button mat-button>
-          <mat-icon>search</mat-icon>
-        </button>
-        <button mat-button>
-          <mat-icon>favorite_outline</mat-icon>
-        </button>
-        
-        
-      </div>
-    </div>
+    <app-product-card *ngFor="let prod of hotProducts$ | async" 
+      [product]="prod"></app-product-card>
   </div>
 </div>
