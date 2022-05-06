@@ -1,0 +1,70 @@
+<div fxLayout="row" class="w-100" class="cart" fxLayoutGap="10px" fxLayout.xs="column">
+  <div fxFlex="70">  
+    <table mat-table [dataSource]="dataSource" class="w-100">
+      <ng-container matColumnDef="select">
+        <th mat-header-cell *matHeaderCellDef>
+          <mat-checkbox (change)="$event ? masterToggle() : null"
+                        [checked]="selection.hasValue() && isAllSelected()"
+                        [indeterminate]="selection.hasValue() && !isAllSelected()">
+          </mat-checkbox>
+        </th>
+        <td mat-cell *matCellDef="let row">
+          <mat-checkbox (click)="$event.stopPropagation()"
+                        (change)="$event ? selection.toggle(row) : null"
+                        [checked]="selection.isSelected(row)">
+          </mat-checkbox>
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="product_image">
+        <th mat-header-cell *matHeaderCellDef>Image</th>
+        <td mat-cell *matCellDef="let element">
+          <img [src]="element.product_image" width="100px" height="120px" style="margin: 10px 0 10px 0">
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="product_name">
+        <th mat-header-cell *matHeaderCellDef>Name</th>
+        <td mat-cell *matCellDef="let element">{{element.product_name}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="price">
+        <th mat-header-cell *matHeaderCellDef>Price</th>
+        <td mat-cell *matCellDef="let element">
+          <span style="color: orange">
+           Php {{element.price}}
+          </span>
+          
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="quantity">
+        <th mat-header-cell *matHeaderCellDef>Quantity</th>
+        <td mat-cell *matCellDef="let element">
+          {{element.quantity}}
+          
+        </td>
+      </ng-container>
+
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;">
+    </table>
+  </div>
+  <div fxFlex="30" class="order-summary" fxLayout="column" fxLayoutAlign="start start">
+      <span class="header">Order Summary</span>
+      <div fxLayout="row" fxLayoutAlign="space-between start" class="w-100" style="margin-bottom:15px">
+        <span class="sub-text">Subtotal({{noOfSelected}} items)</span>
+        <span class="sub-price">Php {{selectedPrice}}</span>
+      </div>
+      <div fxLayout="row" fxLayoutAlign="space-between start" class="w-100" style="margin-bottom:40px">
+        <span class="sub-text">Discount</span>
+        <span class="sub-price">0</span>
+      </div>
+      <div fxLayout="row" fxLayoutAlign="space-between start" class="w-100" style="margin-bottom:20px">
+        <span class="total-text">Total</span>
+        <span class="total-price">Php {{selectedPrice}}</span>
+      </div>
+      <div class="w-100">
+        <button mat-raised-button color="primary" class="w-100" [disabled]="noOfSelected < 1">CHECKOUT NOW ({{noOfSelected}})</button>
+      </div>
+      
+  </div>
+</div>

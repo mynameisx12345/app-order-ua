@@ -1,0 +1,29 @@
+.log-in{
+  //background: rgb(255, 215, 64);
+  .log-screen{
+    background:  #f1f1f1;
+    height: 500px;
+    border: 1px solid #cccccc;
+    padding: 20px;
+  }
+}
+
+mat-divider{
+  margin: 30px 0 30px 0;
+}
+
+.upper-link{
+  cursor: pointer;
+  color: #1b1b1b;
+  margin-top: 5px;
+  
+}
+
+.upper-link:hover{
+  color: #b1b1b1;
+}
+
+.header{
+  height:40px;
+  font-size:20px;
+}

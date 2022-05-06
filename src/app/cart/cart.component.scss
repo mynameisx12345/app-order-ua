@@ -1,0 +1,33 @@
+.cart{
+  min-height: 600px;
+
+  .order-summary{
+    background: white;
+    height: 350px;
+    padding: 15px;
+    .header{
+      height:40px;
+      font-size:20px;
+      margin-bottom:15px;
+    }
+
+    .sub-text{
+      color:#4b4b4b;
+    }
+
+    .sub-price{
+      font-size:17px;
+    }
+
+    .total-price{
+      color: orange;
+      font-size: 20px
+    }
+
+    .total-text{
+      color: black;
+      font-size:15px
+    }
+  }
+  
+}

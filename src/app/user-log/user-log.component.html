@@ -1,0 +1,38 @@
+<div class="log-in w-100" fxLayout="row" fxLayoutAlign="end start">
+  <div class="log-screen" [ngClass]="isMobile ? 'w-100' : 'w-30'" fxLayout="column" fxLayoutAlign="start center">
+    <div class="w-100 header">Log in</div>
+    <div class="w-100" fxLayout="column" fxLayoutAlign="center center">
+      <div class="w-100" fxLayout="column" fxLayoutAlign="center center"
+        [formGroup]="userAFg">
+        <mat-form-field appearance="outline" class="w-100">
+          <mat-label>Email</mat-label>
+          <input matInput required
+          formControlName="email" [value]="'teng@mymail.com'">
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="w-100">
+          <mat-label>Password</mat-label>
+          <input matInput type="password" [value]="'12345'"
+          formControlName="password">
+        </mat-form-field>
+        <button mat-raised-button color="primary" (click)="login()"
+          [disabled]="userAFg.invalid">LOGIN AS REGISTERED USER</button>
+        <span class="upper-link">SIGN UP</span>
+      </div>
+      
+  
+  
+      <mat-divider class="w-100"></mat-divider>
+  
+      <div class="w-100" fxLayout="column" fxLayoutAlign="center center" [formGroup]="userBFg">
+        <mat-form-field appearance="outline" class="w-100">
+          <mat-label>Your Name</mat-label>
+          <input matInput formControlName="name">
+        </mat-form-field>
+        <button mat-raised-button color="primary"
+          [disabled]="userBFg.invalid">LOGIN AS VISITOR</button>
+      </div>
+      
+    </div>
+   
+  </div>
+</div>

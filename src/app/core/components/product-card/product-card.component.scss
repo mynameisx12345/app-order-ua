@@ -36,6 +36,14 @@
     border-bottom-left-radius: 10px;
     overflow: hidden;
   }
+
+  .shop-button{
+    position:absolute; 
+    bottom:0; 
+    right: 0; 
+    cursor: pointer;
+    border-top-left-radius: 5px;
+  }
 }
 
 .products:hover {

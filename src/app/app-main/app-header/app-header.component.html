@@ -5,8 +5,9 @@
           <mat-icon style="font-size:20px">notifications</mat-icon>
           NOTIFICATIONS
       </span>
-      <span class="upper-link">SIGN UP</span>
-      <span class="upper-link">LOG IN</span>
+      <span class="upper-link" *ngIf="!(logged$ | async)">SIGN UP</span>
+      <span class="upper-link" (click)="login()" *ngIf="!(logged$ | async)">LOG IN</span>
+      <span class="upper-link" *ngIf="(logged$ | async)">{{currentUser.first_name}} {{currentUser.last_name}}</span>
   </div>
   <div class="w-100" fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="10px">
       <div fxFlex="20%">Logo</div>
@@ -18,8 +19,12 @@
               </button>
           </mat-form-field>
       </div>
-     <button mat-fab color="accent">
+     <button mat-fab color="accent" (click)="viewCart()" class="posiiton-relative">
       <mat-icon class="icon-cart">shopping_cart</mat-icon>
+      <div *ngIf="!emptyCart(cart$ | async)" class="cart-notif"
+        fxLayout="row" fxLayoutAlign="center center">
+        <span>{{(cart$ | async)?.length}}</span>
+      </div>
      </button>
   </div>
  

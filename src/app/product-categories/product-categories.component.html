@@ -1,4 +1,4 @@
-<div class="w-100 product-categories" fxLayout="row" fxLayoutAlign="start start">
+<div class="w-100 product-categories" fxLayout="row" fxLayout.xs="column" fxLayoutAlign="start start">
   <app-category-list fxFlex="20" (getProducts)="products=$event"></app-category-list>
   <app-category-items fxFlex="80" [products]="products"></app-category-items>
 </div>
