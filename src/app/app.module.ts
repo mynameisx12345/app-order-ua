@@ -11,10 +11,11 @@ import { RouterModule } from '@angular/router';
 import { ProductCategoriesModule } from './product-categories/product-categories.module';
 import { UserLogModule } from './user-log/user-log.module';
 import { CartModule } from './cart/cart.module';
+import { ActionsModule } from './actions/actions.module';
 
 @NgModule({
   declarations: [
-    AppComponent,
+    AppComponent
   ],
   imports: [
     BrowserModule,
@@ -26,7 +27,8 @@ import { CartModule } from './cart/cart.module';
     AppMainModule,
     RouterModule,
     UserLogModule,
-    CartModule
+    CartModule,
+    ActionsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

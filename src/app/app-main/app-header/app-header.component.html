@@ -5,6 +5,7 @@
           <mat-icon style="font-size:20px">notifications</mat-icon>
           NOTIFICATIONS
       </span>
+      <span class="upper-link" (click)="openQueue()">QUEUE</span>
       <span class="upper-link" *ngIf="!(logged$ | async)">SIGN UP</span>
       <span class="upper-link" (click)="login()" *ngIf="!(logged$ | async)">LOG IN</span>
       <span class="upper-link" *ngIf="(logged$ | async)">{{currentUser.first_name}} {{currentUser.last_name}}</span>

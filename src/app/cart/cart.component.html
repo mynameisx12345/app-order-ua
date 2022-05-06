@@ -63,8 +63,22 @@
         <span class="total-price">Php {{selectedPrice}}</span>
       </div>
       <div class="w-100">
-        <button mat-raised-button color="primary" class="w-100" [disabled]="noOfSelected < 1">CHECKOUT NOW ({{noOfSelected}})</button>
+        <button mat-raised-button color="primary" class="w-100" [disabled]="noOfSelected < 1"
+          (click)="confirmCheckout()">PROCEED TO CHECKOUT ({{noOfSelected}})</button>
       </div>
       
   </div>
 </div>
+
+<ng-template #confirmBox>
+  <div class="w-100" fxLayout="column" fxLayoutGap="50px">
+    <span>
+      Queue the order now or hold for later?
+    </span>
+    <div fxLayout="row" fxLayoutAlign="space-between center" class="w-100">
+      <button mat-raised-button color="accent" (click)="saveOrder('Q')">QUEUE NOW</button>
+      <button mat-button (click)="saveOrder('C')">HOLD IT</button>
+      <button mat-button style="color:#cccccc" (click)="currentDialog.close()">Cancel</button>
+    </div>
+  </div>
+</ng-template>
