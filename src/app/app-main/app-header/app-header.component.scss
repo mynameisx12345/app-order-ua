@@ -13,9 +13,21 @@
 
   .upper-link{
     cursor: pointer;
+    text-transform: uppercase;
   }
 
   .upper-link:hover{
     color: #b1b1b1;
+  }
+
+  .cart-notif{
+    color: white; 
+    position:absolute; 
+    top:0; 
+    right: 0; 
+    height:25px; 
+    width: 25px; 
+    background: rgb(255, 136, 0); 
+    border-radius: 13px;
   }
 }

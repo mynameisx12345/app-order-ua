@@ -3,6 +3,7 @@ import { MatSelectionListChange } from '@angular/material/list';
 import { ActivatedRoute } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
 import { filter, switchMap, tap } from 'rxjs/operators';
+import { CommonService } from 'src/app/core/services/common.service';
 import { MainProductBrowserService } from 'src/app/main-product-browser/main-product-browser.service';
 
 
@@ -22,18 +23,22 @@ export class CategoryListComponent implements OnInit {
     })
   )
   selectedCategoryId = new BehaviorSubject(null);
+  isMobile = this.commonService.isMobile;
+  selectedCategoriIdA: any;
   
 
 
   constructor(
     private readonly mainService: MainProductBrowserService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private readonly commonService: CommonService
   ) { }
 
   ngOnInit(): void {
     this.laodCategories$.next(true);
     this.route.queryParams.subscribe(param=>{
       this.selectedCategoryId.next(param.id);
+      this.selectedCategoriIdA = param.id;
     });
 
     this.selectedCategoryId.pipe(
@@ -48,6 +53,11 @@ export class CategoryListComponent implements OnInit {
 
   selectionChangeA(event:MatSelectionListChange){
     this.selectedCategoryId.next(event.options[0].value);
+  }
+
+  selectionChangeB(event:any){
+    console.log('testtesttest', event)
+    this.selectedCategoryId.next(event.value);
   }
 
 }

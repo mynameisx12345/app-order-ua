@@ -9,6 +9,8 @@ import { CoreModule } from './core/core.module';
 import { AppMainModule } from './app-main/app-main.module';
 import { RouterModule } from '@angular/router';
 import { ProductCategoriesModule } from './product-categories/product-categories.module';
+import { UserLogModule } from './user-log/user-log.module';
+import { CartModule } from './cart/cart.module';
 
 @NgModule({
   declarations: [
@@ -23,7 +25,8 @@ import { ProductCategoriesModule } from './product-categories/product-categories
     CoreModule,
     AppMainModule,
     RouterModule,
-    
+    UserLogModule,
+    CartModule
   ],
   providers: [],
   bootstrap: [AppComponent]
