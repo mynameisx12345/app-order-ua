@@ -1,0 +1,5 @@
+<mat-selection-list [multiple]="false">
+  <mat-list-option *ngFor="let queue of queue$ | async" [value]="queue.id">
+    Order: {{queue.id}} // Php {{queue.total}} - {{queue.first_name}}
+  </mat-list-option>
+</mat-selection-list>

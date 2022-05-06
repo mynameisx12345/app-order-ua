@@ -1,9 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
-import { filter, switchMap } from 'rxjs/operators';
+import { catchError, filter, switchMap, tap } from 'rxjs/operators';
 import { UserLogService } from '../user-log/user-log.service';
 import { CartService } from './cart.service';
 import {SelectionModel} from '@angular/cdk/collections';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { NullTemplateVisitor } from '@angular/compiler';
+import { CommonService } from '../core/services/common.service';
+import { throwError } from 'rxjs';
 
 @Component({
   selector: 'app-cart',
@@ -11,10 +15,11 @@ import {SelectionModel} from '@angular/cdk/collections';
   styleUrls: ['./cart.component.scss']
 })
 export class CartComponent implements OnInit {
+  @ViewChild('confirmBox') confirmBox:any;
   selection = new SelectionModel<any>(true, []);
-  orders = [
+  orders = [ 
     {id: 1, product_id: 1, product_name:'Item Name', product_image: '', price:'100.00', quantity:1},
-    {id: 1, product_id: 1, product_name:'Item Name', product_image: '', price:'100.00', quantity:1},
+    {id: 1, product_id: 1, product_name:'ItemName', product_image: '', price:'100.00', quantity:1},
     {id: 1, product_id: 1, product_name:'Item Name', product_image: '', price:'100.00', quantity:1}
   ];
 
@@ -26,9 +31,15 @@ export class CartComponent implements OnInit {
     filter(user=>user!==null),
     switchMap(user=>this.shoppingCart.retrieveCart(user.id))
   )
+
+  currentDialog:any;
+  dialogSize = this.commonService.isMobile ? '90%' : '20%';
+
   constructor(
     private readonly shoppingCart: CartService,
-    private readonly userService: UserLogService
+    private readonly userService: UserLogService,
+    private readonly dialog: MatDialog,
+    private readonly commonService: CommonService
   ) { }
 
   ngOnInit(): void {
@@ -82,6 +93,57 @@ export class CartComponent implements OnInit {
     }
 
     return (Math.round((price + Number.EPSILON) * 100) / 100).toFixed(2);
+  }
+
+  confirmCheckout(){
+    this.currentDialog = this.dialog.open(this.confirmBox,{
+      disableClose: true,
+      width: this.dialogSize
+    })
+  }
+
+  saveOrder(status:string){
+    let data = {
+      id: null,
+      user_id : this.userService.currentUser$.value.id,
+      sub_total: this.selectedPrice,
+      discount: 0,
+      total: this.selectedPrice,
+      status: status,
+      dt_checkout: null,
+      dt_queued: null,
+      dt_served: null,
+      dt_paid: null,
+      dt_cancelled: null,
+      dtl: this.dataSource.data.map((dt:any)=> {
+        return {quantity: dt.quantity, product_id: dt.quantity}
+      }),
+    };
+    this.shoppingCart.saveOrder(data).pipe(
+      catchError(error=>{
+        this.commonService.showError(error.error);
+        return throwError(error);
+      }),
+      tap(res=>{ 
+        let message = '';
+        switch(status){
+          case 'C':
+            message = 'Your order is placed but held';
+            break;
+          case 'Q':
+            message = 'Your order is placed successfully. Now please wait for the queue. See On-queue orders to track';
+            break;
+        }
+        
+        this.commonService.showSuccess(message);
+        this.currentDialog.close();
+
+        this.shoppingCart.cart$.next([]);
+        this.dataSource.data = [];
+        this.selection = new SelectionModel<any>(true, []);
+      })
+    ).subscribe();
+    
   }
 
 }

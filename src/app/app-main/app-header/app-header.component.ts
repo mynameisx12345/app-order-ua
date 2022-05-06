@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { filter, switchMap } from 'rxjs/operators';
 import { CartService } from 'src/app/cart/cart.service';
 import { UserLogService } from 'src/app/user-log/user-log.service';
+import { QueueComponent } from './../../actions/queue/queue.component';
 
 @Component({
   selector: 'app-app-header',
@@ -13,12 +15,13 @@ export class AppHeaderComponent implements OnInit {
   logged$ = this.userService.logged;
   currentUser:any;
   cart$ = this.shoppingCart.cart$;
-  
+  currentDialog:any;
 
   constructor(
     private readonly router:Router,
     private readonly userService: UserLogService,
-    private readonly shoppingCart: CartService
+    private readonly shoppingCart: CartService,
+    private dialog: MatDialog
   ) { }
 
   ngOnInit(): void {
@@ -48,6 +51,14 @@ export class AppHeaderComponent implements OnInit {
 
   emptyCart(cart:any){
     return cart.length === 0
+  }
+
+  openQueue(){
+    this.currentDialog = this.dialog.open(QueueComponent,{
+      disableClose: true,
+      width:'95%',
+      height: '95%'
+    })
   }
 
 }

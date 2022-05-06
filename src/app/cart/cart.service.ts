@@ -49,4 +49,8 @@ export class CartService {
       })
     );
   }
+
+  saveOrder(data:any){
+    return this.http.post(`${this.apiUrl}/api/items/saveOrder`,data);
+  }
 }
