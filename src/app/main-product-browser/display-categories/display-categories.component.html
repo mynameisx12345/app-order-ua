@@ -1,0 +1,11 @@
+<div class="categories" fxLayout="column">
+  <div class="header">Categories</div>
+  <div class="products" fxLayout="row wrap" fxLayoutAlign="center start">
+    <div  *ngFor="let category of categories$ | async" 
+      (click)="goToCategory(category.id)"
+      class="product" fxLayout="column" fxLayoutAlign="start center">
+      <img [src]="category.img" width="100%" height="120px">
+      <span>{{category.name}}</span>
+    </div>
+  </div>
+</div>

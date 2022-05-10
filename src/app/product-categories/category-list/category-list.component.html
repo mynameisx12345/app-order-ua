@@ -1,0 +1,18 @@
+<mat-selection-list #category [multiple]="false" *ngIf="!isMobile"
+  (selectionChange)="selectionChangeA($event)">
+  <mat-list-option *ngFor="let category of categories$ | async" [value]="category.id"
+    [selected]="category.id === selectedCategoryId.value"
+    >
+    {{category.name}}
+    <div></div>
+  </mat-list-option>
+</mat-selection-list>
+
+<mat-form-field appearance="outline" *ngIf="isMobile"> 
+  <mat-label>Categories</mat-label>
+  <mat-select [(value)]="selectedCategoriIdA"
+    (selectionChange)="selectionChangeB($event)">
+    <mat-option *ngFor="let category of categories$ | async" 
+      [value]="category.id">{{category.name}}</mat-option>
+  </mat-select>
+</mat-form-field>
