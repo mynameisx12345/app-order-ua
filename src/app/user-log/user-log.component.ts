@@ -26,8 +26,8 @@ export class UserLogComponent implements OnInit {
     private readonly snackbar: MatSnackBar
   ) { 
     this.userAFg = this.fb.group({
-      email: ['teng@mymail.com', Validators.email],
-      password: ['12345', Validators.required],
+      email: ['', Validators.email],
+      password: ['', Validators.required],
     });
 
     this.userBFg = this.fb.group({
@@ -52,8 +52,6 @@ export class UserLogComponent implements OnInit {
       })
     ).subscribe((res:any)=>{
       if(res.length > 0){
-        this.userService.currentUser$.next(res[0]);
-        this.userService.logged.next(true);
         this.location.back();
       }
     });

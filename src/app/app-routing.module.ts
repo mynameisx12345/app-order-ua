@@ -1,14 +1,19 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { QrScannerComponent} from './core/components/qr-scanner/qr-scanner.component'
+import { QrScanResultComponent } from './core/components/qr-scan-result/qr-scan-result.component';
+import { GuardService } from './core/services/guard.service';
 
 const routes: Routes = [
-  {path: '', redirectTo: '/home', pathMatch: 'full'},
-  // {path: '**', redirectTo: '/home', pathMatch: 'full'},
-  {path: 'main', loadChildren: ()=> import('./main-product-browser/main-product-browser.module').then(m=>m.MainProductBrowserModule)},
-  {path: 'categories', loadChildren: ()=> import('./product-categories/product-categories.module').then(m=>m.ProductCategoriesModule)},
-  {path: 'user', loadChildren: ()=> import('./user-log/user-log.module').then(m=>m.UserLogModule)},
-  {path: 'cart', loadChildren: ()=> import('./cart/cart.module').then(m=>m.CartModule)},
-  {path: 'actions', loadChildren: ()=>import('./actions/actions.module').then(m=>m.ActionsModule)}
+  {path: '', canActivate: [GuardService], redirectTo: '/home', pathMatch: 'full'},
+  //{path: '**', redirectTo: '/home', pathMatch: 'full'},
+  {path: 'qr-scan', component:QrScannerComponent},
+  {path: 'qr-result',canActivate: [GuardService], component:QrScanResultComponent},
+  {path: 'main', canActivate: [GuardService], loadChildren: ()=> import('./main-product-browser/main-product-browser.module').then(m=>m.MainProductBrowserModule)},
+  {path: 'categories', canActivate: [GuardService], loadChildren: ()=> import('./product-categories/product-categories.module').then(m=>m.ProductCategoriesModule)},
+  {path: 'user', canActivate: [GuardService], loadChildren: ()=> import('./user-log/user-log.module').then(m=>m.UserLogModule)},
+  {path: 'cart', canActivate: [GuardService], loadChildren: ()=> import('./cart/cart.module').then(m=>m.CartModule)},
+  {path: 'actions',canActivate: [GuardService], loadChildren: ()=>import('./actions/actions.module').then(m=>m.ActionsModule)}
 ];
 
 @NgModule({
