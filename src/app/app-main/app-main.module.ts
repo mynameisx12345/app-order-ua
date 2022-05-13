@@ -7,6 +7,8 @@ import { RouterModule  } from '@angular/router';
 import { MainProductBrowserModule } from './../main-product-browser/main-product-browser.module'
 import { CoreModule } from './../core/core.module';
 import { ProductCategoriesModule } from './../product-categories/product-categories.module';
+import { ZXingScannerModule } from '@zxing/ngx-scanner';
+//import { NgQrScannerModule } from 'angular2-qrscanner';
 
 @NgModule({
   declarations: [
@@ -19,10 +21,12 @@ import { ProductCategoriesModule } from './../product-categories/product-categor
     RouterModule,
     MainProductBrowserModule,
     CoreModule,
-    ProductCategoriesModule
+    ProductCategoriesModule,
+    ZXingScannerModule,
+    //NgQrScannerModule
   ],
   exports: [
-    AppMainComponent
+    AppMainComponent,
   ]
 })
 export class AppMainModule { }

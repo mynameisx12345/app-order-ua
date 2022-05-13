@@ -36,6 +36,7 @@ export class CartService {
     return this.http.get(`${this.apiUrl}/api/items/retrieveCart?userId=${userId}`).pipe(
       map((cart:any)=>{
         cart.forEach((car:any)=>{
+          car.product_id = car.product_id
           car.price = car.cur_price_a;
           car.product_image = this.sanitizer.bypassSecurityTrustResourceUrl('data:image/jpg;base64,' 
             + car.product_image)

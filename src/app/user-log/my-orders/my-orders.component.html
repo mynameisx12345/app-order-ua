@@ -1,0 +1,118 @@
+<div fxLayout="row">
+  <app-account-info fxFlex="20" *ngIf="!isMobile" [currentValue]="2"></app-account-info>
+  <div fxFlex="80" class="orders-body">
+    <mat-form-field appearance="standard">
+      <mat-label>Search Your Orders</mat-label>
+      <input matInput (keyup)="applyFilter($event)" #input>
+    </mat-form-field>
+    <table mat-table [dataSource]="dataSource" class="w-100">
+      <ng-container matColumnDef="menu">
+        <th mat-header-cell *matHeaderCellDef></th>
+        <td mat-cell *matCellDef="let element">
+          <button mat-button [matMenuTriggerFor]="actionsMenu">
+            <mat-icon>more_vert</mat-icon>
+          </button>
+          <mat-menu #actionsMenu="matMenu">
+            <button mat-menu-item (click)="viewQr(element)"
+              [disabled]="element['status'] === 'Paid' || element['status'] === 'Serving' || element['status'] === 'Cancelled'">
+              View QR
+            </button>
+            <button mat-menu-item (click)="cancelOrder(element.id)"
+              [disabled]="element['status'] === 'Paid' || element['status'] === 'Cancelled'">
+              Cancel
+            </button>
+          </mat-menu>
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="status">
+        <th mat-header-cell *matHeaderCellDef>Status</th>
+        <td mat-cell *matCellDef="let element">
+          <span class="font-weight-bold" 
+            [ngClass]="{'on-queue': element.status === 'On Queue', 
+              'on-hold': element.status === 'On Hold',
+              'serving': element.status === 'Serving',
+              'paid': element.status === 'Paid',
+              'cancelled': element.status === 'Cancelled'}">
+            {{element.status}}
+          </span>
+          
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef>Order Number</th>
+        <td mat-cell *matCellDef="let element">
+          {{element.id}}
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="sub_total">
+        <th mat-header-cell *matHeaderCellDef>Sub Total</th>
+        <td mat-cell *matCellDef="let element">
+          Php {{element.sub_total}}
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="discount">
+        <th mat-header-cell *matHeaderCellDef>Discount</th>
+        <td mat-cell *matCellDef="let element">
+          Php {{element.discount}}
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="total">
+        <th mat-header-cell *matHeaderCellDef>Total</th>
+        <td mat-cell *matCellDef="let element">
+          <span style="font-size:17px; color:orange">
+            Php {{element.total}}
+          </span>
+          
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="products">
+        <th mat-header-cell *matHeaderCellDef>Products</th>
+        <td mat-cell *matCellDef="let element">
+          <div fxLayout="column">
+            <div *ngFor="let product of element.products"
+              class="products"
+              fxLayout="row" fxLayout="start center"  fxLayoutGap="5px">
+              <img [src]="product.product_image" width="70px" height="60px">
+              <div fxLayout="column">
+                <span>{{product.product_name}}</span>
+                <div>
+                  <span>{{product.quantity}}</span> /
+                  <span>Php {{product.price}}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;">
+    </table>
+    <mat-paginator [pageSizeOptions]="[5, 10, 20]"
+                 showFirstLastButtons>
+  </mat-paginator>
+  </div>
+</div>
+
+<ng-template #qrWindow>
+  <div>
+    <qrcode [qrdata]="qrData.id" [width]="256" [errorCorrectionLevel]="'M'"></qrcode>
+  </div>
+</ng-template>
+
+<ng-template #confirmBox>
+  <div fxLayout="column">
+    <div class="w-100" style="padding-bottom:20px">
+      Are you sure you want to cancel the order {{selectedOrderId}}?
+    </div>
+    <div fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="20px">
+       <button mat-raised-button color="accent" (click)="cancel()">
+         OK
+       </button>
+       <button mat-button (click)="currentDialog.close()">
+         Close
+       </button>
+    </div>
+  </div>
+</ng-template>

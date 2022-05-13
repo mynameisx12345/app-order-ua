@@ -1,0 +1,9 @@
+<div class="w-100 qr-result" fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="50px">
+  <div class="w-100 description" *ngIf="serveStatus">Order {{qrValue}} is being served</div>
+  <div class="w-100 description-error" *ngIf="serveStatus === false">Order {{qrValue}} is NOT ON QUEUE</div>
+  <div class="w-100" fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="30px">
+    <button mat-raised-button color="accent" (click)="jumpToQrCode()">SERVE NEXT</button>
+    <!-- <button mat-button>REVERT ORDER</button> -->
+    <button mat-button *ngIf="serveStatus===false" (click)="forceServe()">Serve Anyway</button>
+  </div>
+</div>

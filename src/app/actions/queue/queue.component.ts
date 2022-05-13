@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { filter, switchMap, tap } from 'rxjs/operators';
+import { UserLogService } from 'src/app/user-log/user-log.service';
 import { ActionsService } from '../actions.service';
 
 @Component({
@@ -8,9 +9,10 @@ import { ActionsService } from '../actions.service';
   templateUrl: './queue.component.html',
   styleUrls: ['./queue.component.scss']
 })
-export class QueueComponent implements OnInit {
+export class QueueComponent implements OnInit, OnDestroy {
   loadQueue$ = new BehaviorSubject(false);
-
+  queueInterVal:any;
+  currentUser$ = this.userService.currentUser$;
   queue$:any = this.loadQueue$.pipe(
     filter(load=>load),
     switchMap(load=>this.actionsService.getOrders('status=Q')),
@@ -20,15 +22,19 @@ export class QueueComponent implements OnInit {
     })
   )
   constructor(
-    private readonly actionsService: ActionsService
+    private readonly actionsService: ActionsService,
+    private readonly userService: UserLogService
   ) { }
 
   ngOnInit(): void {
     this.loadQueue$.next(true);
 
-    setInterval(()=>{
+    this.queueInterVal = setInterval(()=>{
       this.loadQueue$.next(true);
     },4000)
+  }
+  ngOnDestroy(): void {
+    clearInterval(this.queueInterVal);
   }
 
 }

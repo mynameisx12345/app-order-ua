@@ -1,0 +1,20 @@
+.queue{
+  height:40px;
+  margin: 5px;
+  border-radius: 5px;
+  padding: 5px;
+}
+
+.queue-on{
+  background: rgb(16, 148, 209);
+  color: white;
+}
+
+.queue-off{
+  background: rgb(97, 97, 97);
+  color: white;
+}
+
+.queue:hover{
+  opacity: 0.8;
+}
