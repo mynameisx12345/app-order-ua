@@ -3,9 +3,11 @@ import { CommonModule } from '@angular/common';
 import { Routes, RouterModule } from '@angular/router';
 import { ActionsComponent } from './actions.component';
 import { GuardService } from '../core/services/guard.service';
+import { ManageProductsComponent } from './manage-products/manage-products.component';
 
 const routes: Routes = [
-  //{path: 'actions-main', canActivate: [GuardService], component: ActionsComponent, children: []}
+  {path: 'manage-products', canActivate: [GuardService], component: ManageProductsComponent, children: [], data:{breadcrumb:'Manage Products'}},
+  
 ];
 
 

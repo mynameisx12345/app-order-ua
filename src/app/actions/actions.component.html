@@ -1,1 +1,9 @@
-<p>actions works!</p>
+<mat-selection-list [multiple]="false">
+  <mat-list-option *ngFor="let item of list" [value]="item.id"
+    [selected]="currentValue === item.id">
+    <div class="w-100" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="5px">
+      <mat-icon style="color:rgb(148, 146, 146)">{{item.icon}}</mat-icon><span>{{item.name}}</span>
+    </div>
+    
+  </mat-list-option>
+</mat-selection-list>
