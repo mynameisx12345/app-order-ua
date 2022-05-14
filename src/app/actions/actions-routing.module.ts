@@ -5,7 +5,7 @@ import { ActionsComponent } from './actions.component';
 import { GuardService } from '../core/services/guard.service';
 
 const routes: Routes = [
-  {path: 'actions-main', canActivate: [GuardService], component: ActionsComponent, children: []}
+  //{path: 'actions-main', canActivate: [GuardService], component: ActionsComponent, children: []}
 ];
 
 

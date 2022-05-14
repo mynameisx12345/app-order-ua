@@ -1,7 +1,8 @@
 .header{
-  height: 100px;
+  height: auto;
   margin-top: 20px;
   width: 100%;
+  min-height: 100px;
 
   ::ng-deep .mat-form-field-wrapper{
     margin-bottom: -1.25em !important;

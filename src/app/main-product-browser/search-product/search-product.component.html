@@ -1,0 +1,12 @@
+<div fxLayout="column">
+  <div fxLayout="row wrap" fxLayoutAlign="center start" class="search" *ngIf="searchResult.length > 0; else noResult">
+    <app-product-card *ngFor="let prod of searchResult" 
+      [product]="prod"></app-product-card>
+  </div>
+  <ng-template #noResult>
+    <div fxLayout="row" fxLayoutAlign="center center" class="w-100 no-result">
+      <span>No product found</span>
+    </div>
+  </ng-template>
+  <app-hot-today></app-hot-today>
+</div>

@@ -1,0 +1,30 @@
+.breadcrumb {
+  background: none;
+  font-size: 14px;
+  margin: 0;
+  a,
+  span {
+    color: rgb(103,58,183);
+    text-decoration: none;
+  }
+  a:hover,
+  span:hover {
+    color: dimgrey;
+    text-decoration: none;
+  }
+  li {
+    list-style: none;
+    float: left;
+    margin: 5px;
+  }
+  li:last-child {
+    margin-right: 20px;
+  }
+  li::after {
+    content: ">";
+    color: rgb(103,58,183);
+  }
+  li:last-child::after {
+    content: "";
+  }
+}

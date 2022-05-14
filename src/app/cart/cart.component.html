@@ -76,9 +76,11 @@
       Queue the order now or hold for later?
     </span>
     <div fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="5px" class="w-100">
-      <button mat-raised-button color="accent" (click)="saveOrder('Q')">QUEUE NOW</button>
+      <button mat-raised-button color="accent" (click)="saveOrder('Q')"
+        [disabled]="loading">QUEUE NOW</button>
       <!-- <button mat-button (click)="saveOrder('C')">HOLD IT</button> -->
-      <button mat-button  (click)="currentDialog.close()">Cancel</button>
+      <button mat-button  (click)="currentDialog.close()"
+        [disabled]="loading">Cancel</button>
     </div>
   </div>
 </ng-template>

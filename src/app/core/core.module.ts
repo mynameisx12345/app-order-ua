@@ -20,12 +20,14 @@ import { QRCodeModule } from 'angularx-qrcode';
 import { QrScannerComponent } from './components/qr-scanner/qr-scanner.component';
 import { ZXingScannerModule } from '@zxing/ngx-scanner';
 import { QrScanResultComponent } from './components/qr-scan-result/qr-scan-result.component';
-
+import { BreadcrumbComponent } from './components/breadcrumb/breadcrumb.component';
+import { RouterModule } from '@angular/router';
 @NgModule({
   declarations: [
     ProductCardComponent,
     QrScannerComponent,
-    QrScanResultComponent
+    QrScanResultComponent,
+    BreadcrumbComponent
   ],
   imports: [
     CommonModule,
@@ -45,7 +47,8 @@ import { QrScanResultComponent } from './components/qr-scan-result/qr-scan-resul
     MatMenuModule,
     MatPaginatorModule,
     QRCodeModule,
-    ZXingScannerModule
+    ZXingScannerModule,
+    RouterModule
   ],
   exports: [
     MatInputModule,
@@ -66,7 +69,8 @@ import { QrScanResultComponent } from './components/qr-scan-result/qr-scan-resul
     MatPaginatorModule,
     QRCodeModule,
     QrScannerComponent,
-    ZXingScannerModule
+    ZXingScannerModule,
+    BreadcrumbComponent
   ]
 })
 export class CoreModule { }

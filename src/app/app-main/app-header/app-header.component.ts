@@ -1,6 +1,6 @@
 import { AfterViewInit, Component, OnInit, QueryList, ViewChild, ViewChildren } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { Router } from '@angular/router';
+import { NavigationStart, Router } from '@angular/router';
 import { filter, switchMap } from 'rxjs/operators';
 import { CartService } from 'src/app/cart/cart.service';
 import { UserLogService } from 'src/app/user-log/user-log.service';
@@ -23,14 +23,25 @@ export class AppHeaderComponent implements OnInit, AfterViewInit {
   @ViewChild('scanner') scanner: any;
   //@ViewChild(QrScannerComponent, { static: true }) qrScannerComponent:any;
   qrUrl = environment.qrUrl;
+  currentUrl:any;
   constructor(
     private readonly router:Router,
     private readonly userService: UserLogService,
     private readonly shoppingCart: CartService,
     private dialog: MatDialog
-  ) { }
+  ) { 
+    this.router.events
+          .subscribe(
+            (event: any) => {
+              if(event instanceof NavigationStart) {
+               this.currentUrl = event.url;
+               console.log('curUrl', this.currentUrl)
+              }
+            });
+  }
 
   ngOnInit(): void {
+    console.log('urlasd', this.currentUrl)
     this.userService.currentUser$.subscribe(res=>{
       this.currentUser = res;
     });
@@ -49,7 +60,7 @@ export class AppHeaderComponent implements OnInit, AfterViewInit {
    }
 
   login(){
-    this.router.navigate(['/log-in']);
+    this.router.navigate(['/user/log-in']);
   }
 
   viewCart(){
@@ -87,6 +98,11 @@ export class AppHeaderComponent implements OnInit, AfterViewInit {
     this.userService.logout();
     this.router.navigate(['/home']);
     this.shoppingCart.cart$.next([]);
+  }
+
+  search(searchString:string){
+    console.log(searchString);
+    this.router.navigate(['/search-products'],{queryParams:{searchString:searchString}});
   }
 
   // qrLoad(){
