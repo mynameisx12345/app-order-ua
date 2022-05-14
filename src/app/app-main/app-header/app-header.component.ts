@@ -101,38 +101,12 @@ export class AppHeaderComponent implements OnInit, AfterViewInit {
   }
 
   search(searchString:string){
-    console.log(searchString);
     this.router.navigate(['/search-products'],{queryParams:{searchString:searchString}});
   }
 
-  // qrLoad(){
-  //   this.qrScannerComponent.getMediaDevices().then((devices:any) => {
-  //     console.log('testdevice',devices);
-  //     const videoDevices: MediaDeviceInfo[] = [];
-  //     for (const device of devices) {
-  //         if (device.kind.toString() === 'videoinput') {
-  //             videoDevices.push(device);
-  //         }
-  //     }
-  //     if (videoDevices.length > 0){
-  //         let choosenDev;
-  //         for (const dev of videoDevices){
-  //             if (dev.label.includes('front')){
-  //                 choosenDev = dev;
-  //                 break;
-  //             }
-  //         }
-  //         if (choosenDev) {
-  //             this.qrScannerComponent.chooseCamera.next(choosenDev);
-  //         } else {
-  //             this.qrScannerComponent.chooseCamera.next(videoDevices[0]);
-  //         }
-  //     }
-  //   });
+  manageProudcts(){
+    this.router.navigate(['/manage-products']);
+  }
 
-  //   this.qrScannerComponent.capturedQr.subscribe((result:any) => {
-  //       console.log('qrrrr',result);
-  //   });
-  //}
 
 }

@@ -14,4 +14,8 @@ export class ActionsService {
   getOrders(param:string){
     return this.http.get(`${this.apiUrl}/api/orders/getOrders?${param}`)
   }
+
+  saveProduct(data:any){
+    return this.http.post(`${this.apiUrl}/api/items/saveProduct`,data);
+  }
 }

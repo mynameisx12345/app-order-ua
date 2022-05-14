@@ -1,6 +1,6 @@
 <div fxLayout="row">
   <app-account-info fxFlex="20" *ngIf="!isMobile" [currentValue]="2"></app-account-info>
-  <div fxFlex="80" class="orders-body">
+  <div fxFlex="80" fxFlex.xs="100" class="orders-body">
     <mat-form-field appearance="standard">
       <mat-label>Search Your Orders</mat-label>
       <input matInput (keyup)="applyFilter($event)" #input>

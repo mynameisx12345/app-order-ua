@@ -24,7 +24,6 @@ export class MyOrdersComponent implements OnInit, AfterViewInit {
     switchMap(([load, user])=>this.userService.getOdersDetailed(user.id)),
     tap((orders:any)=>{
       this.dataSource.data = orders;
-      console.log('sssdfe', orders);
     })
   );
 
