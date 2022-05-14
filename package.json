@@ -7,7 +7,9 @@
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "start-qr" : "ng serve --host 0.0.0.0 --port 4202 --ssl-cert ./localhost.crt --ssl-key ./localhost.key",
+    "start-network": "ng serve --host 0.0.0.0"
   },
   "private": true,
   "dependencies": {
@@ -22,6 +24,11 @@
     "@angular/platform-browser": "~11.0.5",
     "@angular/platform-browser-dynamic": "~11.0.5",
     "@angular/router": "~11.0.5",
+    "@zxing/browser": "^0.1.1",
+    "@zxing/library": "^0.19.1",
+    "@zxing/ngx-scanner": "^3.3.0",
+    "angular2-qrscanner": "^1.0.7",
+    "angularx-qrcode": "^11.0.0",
     "ngx-device-detector": "^2.0.4",
     "rxjs": "~6.6.0",
     "tslib": "^2.0.0",

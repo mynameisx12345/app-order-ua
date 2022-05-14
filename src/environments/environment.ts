@@ -1,11 +1,12 @@
 // This file can be replaced during build by using the `fileReplacements` array.
 // `ng build --prod` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
-
+const serverIp = '192.168.8.132';
 export const environment = {
   production: false,
-  apiUrl: 'http://192.168.8.132:8080'
-
+  apiUrl: `http://${serverIp}:8080`,
+  uiUrl: `http://${serverIp}:4200`,
+  qrUrl: `https://${serverIp}:4202/qr-scan`
 };
 
 

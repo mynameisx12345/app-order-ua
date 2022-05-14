@@ -8,6 +8,8 @@ import { MyFavoritesComponent } from './my-favorites/my-favorites.component';
 import { DisplayCategoriesComponent } from './display-categories/display-categories.component';
 import { HttpClientModule } from '@angular/common/http';
 import { MainProductBrowserRoutingModule } from './main-product-browser-routing.module';
+import { ProductCategoriesModule } from '../product-categories/product-categories.module';
+import { SearchProductComponent } from './search-product/search-product.component';
 
 @NgModule({
   declarations: [
@@ -15,13 +17,15 @@ import { MainProductBrowserRoutingModule } from './main-product-browser-routing.
     HeaderComponent,
     HotTodayComponent,
     MyFavoritesComponent,
-    DisplayCategoriesComponent
+    DisplayCategoriesComponent,
+    SearchProductComponent
   ],
   imports: [
     CommonModule,
     CoreModule,
     HttpClientModule,
-    MainProductBrowserRoutingModule
+    MainProductBrowserRoutingModule,
+    ProductCategoriesModule
   ],
   exports: [
     MainProductBrowserComponent,

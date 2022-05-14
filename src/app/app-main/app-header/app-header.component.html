@@ -6,16 +6,75 @@
           NOTIFICATIONS
       </span>
       <span class="upper-link" (click)="openQueue()">QUEUE</span>
+      <span class="upper-link" [matMenuTriggerFor]="actionsMenu"
+        *ngIf="currentUser?.user_type === 'clerk' || currentUser?.user_type === 'admin'">ACTIONS</span>
       <span class="upper-link" *ngIf="!(logged$ | async)">SIGN UP</span>
       <span class="upper-link" (click)="login()" *ngIf="!(logged$ | async)">LOG IN</span>
-      <span class="upper-link" *ngIf="(logged$ | async)">{{currentUser.first_name}} {{currentUser.last_name}}</span>
+      <span class="upper-link" [matMenuTriggerFor]="accountMenu"
+        *ngIf="(logged$ | async)">{{currentUser.first_name}} {{currentUser.last_name}}</span>
   </div>
+  <mat-menu #accountMenu="matMenu">
+    <button mat-menu-item>
+        <mat-icon>account_circle</mat-icon>
+        <span>My Account</span>
+    </button>
+      <button mat-menu-item (click)="goToOrders()">
+          <mat-icon>inbox</mat-icon>
+          <span>My Orders</span>
+      </button>
+      <button mat-menu-item (click)="logout()">
+        <mat-icon>logout</mat-icon>
+        <span>Logout</span>
+    </button>
+  </mat-menu>
+
+  <mat-menu #actionsMenu="matMenu">
+    <div fxLayout="column" style="padding:5px">
+        <span style="font-weight:bold; border-bottom:1px solid #ccc">Process Orders</span>
+        <button mat-menu-item (click)="jumpToQrCode()">
+            <mat-icon>qr_code_scanner</mat-icon>
+            Serve
+        </button>
+        <button mat-menu-item>
+            <mat-icon>qr_code_scanner</mat-icon>
+            Pay
+        </button>
+    </div>
+    <div fxLayout="column" style="padding:5px">
+        <span style="font-weight:bold; border-bottom:1px solid #ccc">Manage Application</span>
+        <button mat-menu-item [matMenuTriggerFor]="maintenanceMenu">
+            <mat-icon>backup_table</mat-icon>
+            Maintenance
+        </button>
+        <button mat-menu-item>
+            <mat-icon>settings</mat-icon>
+            Settings
+        </button>
+    </div>
+  </mat-menu>
+  <mat-menu #maintenanceMenu="matMenu">
+      <button mat-menu-item>
+          Accounts
+        </button>
+      <button mat-menu-item>
+          Categories
+        </button>
+      <button mat-menu-item>
+          Featured
+        </button>
+      <button mat-menu-item>Products</button>
+  </mat-menu>
   <div class="w-100" fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="10px">
-      <div fxFlex="20%">Logo</div>
+      <div fxFlex="20%">
+        <img src="../../../assets//images/logo.png" style="width:100%; height:100%">
+      </div>
       <div fxFlex="70%">
           <mat-form-field appearance="outline" class="w-100">
-              <input matInput placeholder="Search Canteen">
-              <button mat-button matSuffix>
+              <input matInput placeholder="Search Canteen" #searchString
+              (keyup.enter)="search(searchString.value)">
+              <button mat-button matSuffix (click)="search(searchString.value)" 
+                
+                [disabled]="searchString.value.length === 0">
                   <mat-icon>search</mat-icon>
               </button>
           </mat-form-field>
@@ -28,5 +87,19 @@
       </div>
      </button>
   </div>
+  <div class="w-100" fxLayout="row">
+    <app-breadcrumb [hidden]="currentUrl === '/' || currentUrl === '/home'"></app-breadcrumb>
+  </div>
+  
  
 </div>
+
+<ng-template #scannerCont>
+    <div class="w-100">
+        
+        <!-- <qr-scanner #qrscanner
+            [debug]="false">
+        </qr-scanner>
+  -->
+    </div>
+</ng-template>

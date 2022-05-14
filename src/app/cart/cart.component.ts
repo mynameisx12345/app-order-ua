@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
-import { catchError, filter, switchMap, tap } from 'rxjs/operators';
+import { catchError, filter, finalize, switchMap, tap } from 'rxjs/operators';
 import { UserLogService } from '../user-log/user-log.service';
 import { CartService } from './cart.service';
 import {SelectionModel} from '@angular/cdk/collections';
@@ -8,6 +8,7 @@ import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { NullTemplateVisitor } from '@angular/compiler';
 import { CommonService } from '../core/services/common.service';
 import { throwError } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-cart',
@@ -33,13 +34,14 @@ export class CartComponent implements OnInit {
   )
 
   currentDialog:any;
-  dialogSize = this.commonService.isMobile ? '90%' : '20%';
-
+  dialogSize = this.commonService.isMobile ? '90%' : '30%';
+  loading = false;
   constructor(
     private readonly shoppingCart: CartService,
     private readonly userService: UserLogService,
     private readonly dialog: MatDialog,
-    private readonly commonService: CommonService
+    private readonly commonService: CommonService,
+    private readonly router: Router
   ) { }
 
   ngOnInit(): void {
@@ -103,6 +105,7 @@ export class CartComponent implements OnInit {
   }
 
   saveOrder(status:string){
+    this.loading= true;
     let data = {
       id: null,
       user_id : this.userService.currentUser$.value.id,
@@ -116,7 +119,7 @@ export class CartComponent implements OnInit {
       dt_paid: null,
       dt_cancelled: null,
       dtl: this.dataSource.data.map((dt:any)=> {
-        return {quantity: dt.quantity, product_id: dt.quantity}
+        return {quantity: dt.quantity, product_id: dt.product_id, price: dt.price }
       }),
     };
     this.shoppingCart.saveOrder(data).pipe(
@@ -141,6 +144,10 @@ export class CartComponent implements OnInit {
         this.shoppingCart.cart$.next([]);
         this.dataSource.data = [];
         this.selection = new SelectionModel<any>(true, []);
+        this.router.navigate(['/my-orders'])
+      }),
+      finalize(()=>{
+        this.loading = false;
       })
     ).subscribe();
     

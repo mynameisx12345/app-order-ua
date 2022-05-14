@@ -10,6 +10,7 @@ import { CommonService } from '../core/services/common.service';
 })
 export class AppMainComponent implements OnInit {
   isMobile = this.deviceService.isMobile();;
+  currentUrl = '';
 
   constructor(
     private deviceService: DeviceDetectorService,
@@ -19,7 +20,12 @@ export class AppMainComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.router.navigate(['/home']);
+    //this.router.navigate(['/home']);
+    this.currentUrl = window.location.href;
+  }
+
+  get isQrUrl(){
+    return this.currentUrl.indexOf('qr-scan') > -1;
   }
 
 }

@@ -14,10 +14,20 @@ import { MatTableModule } from '@angular/material/table';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatDialogModule } from '@angular/material/dialog';
-
+import { MatMenuModule } from '@angular/material/menu';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { QRCodeModule } from 'angularx-qrcode';
+import { QrScannerComponent } from './components/qr-scanner/qr-scanner.component';
+import { ZXingScannerModule } from '@zxing/ngx-scanner';
+import { QrScanResultComponent } from './components/qr-scan-result/qr-scan-result.component';
+import { BreadcrumbComponent } from './components/breadcrumb/breadcrumb.component';
+import { RouterModule } from '@angular/router';
 @NgModule({
   declarations: [
-    ProductCardComponent
+    ProductCardComponent,
+    QrScannerComponent,
+    QrScanResultComponent,
+    BreadcrumbComponent
   ],
   imports: [
     CommonModule,
@@ -33,7 +43,12 @@ import { MatDialogModule } from '@angular/material/dialog';
     MatTableModule,
     MatSnackBarModule,
     MatCheckboxModule,
-    MatDialogModule
+    MatDialogModule,
+    MatMenuModule,
+    MatPaginatorModule,
+    QRCodeModule,
+    ZXingScannerModule,
+    RouterModule
   ],
   exports: [
     MatInputModule,
@@ -49,7 +64,13 @@ import { MatDialogModule } from '@angular/material/dialog';
     MatTableModule,
     MatSnackBarModule,
     MatCheckboxModule,
-    MatDialogModule
+    MatDialogModule,
+    MatMenuModule,
+    MatPaginatorModule,
+    QRCodeModule,
+    QrScannerComponent,
+    ZXingScannerModule,
+    BreadcrumbComponent
   ]
 })
 export class CoreModule { }
