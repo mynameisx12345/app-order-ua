@@ -5,7 +5,7 @@ import { CartComponent } from './cart.component';
 import { GuardService } from '../core/services/guard.service';
 
 const routes: Routes = [
-  {path: 'shopping-cart', canActivate: [GuardService], component: CartComponent, children: []}
+  {path: 'shopping-cart', canActivate: [GuardService], component: CartComponent, children: [], data: {breadcrumb:'My Cart'}}
 ];
 
 
@@ -13,7 +13,7 @@ const routes: Routes = [
   declarations: [],
   imports: [
     CommonModule,
-    RouterModule.forRoot(routes)
+    RouterModule.forChild(routes)
   ],
   exports: [
     RouterModule

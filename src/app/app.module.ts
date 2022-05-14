@@ -22,7 +22,7 @@ import { ActionsModule } from './actions/actions.module';
     AppRoutingModule,
     BrowserAnimationsModule,
     MainProductBrowserModule,
-    ProductCategoriesModule,
+   // ProductCategoriesModule,
     CoreModule,
     AppMainModule,
     RouterModule,

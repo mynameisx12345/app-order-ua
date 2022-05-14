@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
-import { catchError, filter, switchMap, tap } from 'rxjs/operators';
+import { catchError, filter, finalize, switchMap, tap } from 'rxjs/operators';
 import { UserLogService } from '../user-log/user-log.service';
 import { CartService } from './cart.service';
 import {SelectionModel} from '@angular/cdk/collections';
@@ -35,7 +35,7 @@ export class CartComponent implements OnInit {
 
   currentDialog:any;
   dialogSize = this.commonService.isMobile ? '90%' : '30%';
-
+  loading = false;
   constructor(
     private readonly shoppingCart: CartService,
     private readonly userService: UserLogService,
@@ -105,6 +105,7 @@ export class CartComponent implements OnInit {
   }
 
   saveOrder(status:string){
+    this.loading= true;
     let data = {
       id: null,
       user_id : this.userService.currentUser$.value.id,
@@ -144,6 +145,9 @@ export class CartComponent implements OnInit {
         this.dataSource.data = [];
         this.selection = new SelectionModel<any>(true, []);
         this.router.navigate(['/my-orders'])
+      }),
+      finalize(()=>{
+        this.loading = false;
       })
     ).subscribe();
     

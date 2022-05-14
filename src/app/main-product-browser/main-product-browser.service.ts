@@ -56,6 +56,26 @@ export class MainProductBrowserService {
       }),
     )
   }
+
+  searchProducts(searchString:string) : Observable<any[]>{
+    return this.http.get(`${this.apiUrl}/api/items/searchProducts?searchString=${searchString}`).pipe(
+      map((searchResult:any)=>{
+        let result: Products[] =[];
+  
+        searchResult.forEach((res:any)=>{
+          result.push({
+            productId:res.id, 
+            name: res.product_name, 
+            img: this.sanitizer.bypassSecurityTrustResourceUrl('data:image/jpg;base64,' 
+              + res.product_image),
+            price: res.cur_price_a
+          });
+        });
+  
+        return result;
+      })
+    )
+  }
 }
 
 export interface Category{
