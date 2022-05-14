@@ -8,7 +8,7 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "start-qr" : "ng serve --host 0.0.0.0 --port 4202 --ssl-cert ./localhost.crt --ssl-key ./localhost.key",
+    "start-qr" : "ng serve --host 0.0.0.0 --port 4202 --ssl true --ssl-cert ./localhost.crt --ssl-key ./localhost.key",
     "start-network": "ng serve --host 0.0.0.0"
   },
   "private": true,

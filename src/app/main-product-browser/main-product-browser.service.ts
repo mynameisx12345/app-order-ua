@@ -66,9 +66,11 @@ export class MainProductBrowserService {
           result.push({
             productId:res.id, 
             name: res.product_name, 
-            img: this.sanitizer.bypassSecurityTrustResourceUrl('data:image/jpg;base64,' 
-              + res.product_image),
-            price: res.cur_price_a
+            img: res.product_image ? this.sanitizer.bypassSecurityTrustResourceUrl('data:image/jpg;base64,' 
+              + res.product_image) : res.product_image,
+            price: res.cur_price_a,
+            category: res.category_name
+
           });
         });
   
@@ -89,7 +91,8 @@ interface Products {
   productId: string,
   name?: string,
   img?: any,
-  price?: string
+  price?: string,
+  category?: string
 }
 
 

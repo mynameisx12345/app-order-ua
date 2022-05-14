@@ -90,6 +90,8 @@ export class UserLogService {
   updateOrderStatus(data:{}){
     return this.http.post(`${this.apiUrl}/api/orders/updateOrderStatus`,data);
   }
+
+  
 }
 
 export interface UserModel{
