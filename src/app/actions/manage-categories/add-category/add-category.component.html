@@ -1,0 +1,23 @@
+<div class="w-100" fxLayout="column" fxLayoutGap="20px">
+  <span style="font-size:20px">Add Category</span>
+  <div class="w-100" [formGroup]="formGroup">
+    <mat-form-field appearance="outline" class="w-100">
+      <mat-label>Name</mat-label>
+      <input matInput formControlName="name">
+    </mat-form-field>
+    <mat-form-field appearance="outline" class="w-100">
+      <mat-label>Image</mat-label>
+      <input matInput [value]="fileToUpload?.name" readonly>
+      <input type="file" #file accept="image/*" hidden="true" 
+        (change)="handleFileInput($event)">
+      <button mat-button matSuffix (click)="file.click()">
+        <mat-icon>photo_camera</mat-icon>
+      </button>
+    </mat-form-field>
+  </div>
+  <div class="w-100" fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="20px">
+    <button mat-raised-button color="accent" [disabled]="formGroup.invalid"
+      (click)="closeDialog(true,formGroup.value)">SAVE</button>
+    <button mat-button (click)="closeDialog(false,{})">Close</button>
+  </div>
+</div>

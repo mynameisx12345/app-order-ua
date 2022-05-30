@@ -18,8 +18,10 @@
       </mat-form-field>
       <mat-form-field appearance="outline" class="w-100">
         <mat-label>Image</mat-label>
-        <input matInput>
-        <button mat-button matSuffix>
+        <input matInput [value]="fileToUpload?.name" readonly>
+        <input type="file" #file accept="image/*" hidden="true" 
+          (change)="handleFileInput($event)">
+        <button mat-button matSuffix (click)="file.click()">
           <mat-icon>photo_camera</mat-icon>
         </button>
       </mat-form-field>

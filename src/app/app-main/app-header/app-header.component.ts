@@ -108,5 +108,10 @@ export class AppHeaderComponent implements OnInit, AfterViewInit {
     this.router.navigate(['/manage-products']);
   }
 
+  manageCategories(){
+    this.router.navigate(['/manage-categories']);
+  }
+
+
 
 }

@@ -1,18 +1,18 @@
 <div fxLayout="row" fxLayoutGap="10px">
-  <app-actions fxFlex="20" [currentValue]="4" *ngIf="!isMobile"></app-actions>
+  <app-actions fxFlex="20" [currentValue]="2" *ngIf="!isMobile"></app-actions>
   <div fxFlex="80" fxFlex.xs="100" fxLayout="column" class="body-height">
     <div class="w-100" fxLayout="row" fxLayoutAlign="space-between center"> 
       <mat-form-field appearance="standard">
-        <mat-label>Search Products</mat-label>
+        <mat-label>Search Categories</mat-label>
         <input matInput (keyup)="applyFilter($event)" #input>
       </mat-form-field>
-      <button mat-fab color="primary" (click)="addProduct()"><mat-icon>add</mat-icon></button>
+      <button mat-fab color="primary" (click)="addCategory()"><mat-icon>add</mat-icon></button>
     </div>
     <table mat-table [dataSource]="dataSource" class="w-100">
-      <ng-container matColumnDef="productId">
-        <th mat-header-cell *matHeaderCellDef>Product ID</th>
+      <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef>Category ID</th>
         <td mat-cell *matCellDef="let element">
-          {{element.productId}}
+          {{element.id}}
         </td>
       </ng-container>
       <ng-container matColumnDef="name">
@@ -21,16 +21,12 @@
           {{element.name}}
         </td>
       </ng-container>
-      <ng-container matColumnDef="category">
-        <th mat-header-cell *matHeaderCellDef>Category</th>
+      <ng-container matColumnDef="img">
+        <th mat-header-cell *matHeaderCellDef>Image</th>
         <td mat-cell *matCellDef="let element">
-          {{element.category}}
-        </td>
-      </ng-container>
-      <ng-container matColumnDef="price">
-        <th mat-header-cell *matHeaderCellDef>Current Price</th>
-        <td mat-cell *matCellDef="let element">
-          {{element.price}}
+          <div *ngIf="!!element.img">
+            [<a (click)="showImage(element.img)" href="javascript:void()">Image</a>]
+          </div>
         </td>
       </ng-container>
       <ng-container matColumnDef="action">
@@ -42,15 +38,6 @@
           </button>
         </td>
       </ng-container>
-      <ng-container matColumnDef="image">
-        <th mat-header-cell *matHeaderCellDef>Image</th>
-        <td mat-cell *matCellDef="let element">
-          <div *ngIf="!!element.img">
-            [<a (click)="showImage(element.img)" href="javascript:void()">Image</a>]
-          </div>
-        </td>
-      </ng-container>
-
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
       <tr mat-row *matRowDef="let row; columns: displayedColumns;">
     </table>
@@ -60,12 +47,8 @@
   </div>
 </div>
 
-<mat-menu>
-  <button mat-menu-item></button>
-</mat-menu>
-
 <ng-template #image>
-<div class="w-100">
-  <img [src]="viewImage" style="width:auto; height:auto">
-</div>
+  <div class="w-100">
+    <img [src]="viewImage" style="width:auto; height:auto">
+  </div>
 </ng-template>

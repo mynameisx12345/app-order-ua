@@ -27,8 +27,8 @@ export class MainProductBrowserService {
           categoriesFormatted.push({
             id:cat.id,
             name: cat.category_name,
-            img: this.sanitizer.bypassSecurityTrustResourceUrl('data:image/jpg;base64,' 
-            + cat.category_image),
+            img: cat.category_image ? this.sanitizer.bypassSecurityTrustResourceUrl('data:image/jpg;base64,' 
+            + cat.category_image) : cat.category_image, 
           });
         });
         

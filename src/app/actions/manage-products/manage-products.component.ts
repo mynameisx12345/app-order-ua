@@ -38,7 +38,6 @@ export class ManageProductsComponent implements OnInit, AfterViewInit {
       filter(load=>load),
       switchMap(()=> this.mainService.searchProducts('')),
       tap((result)=>{
-        console.log('resultewr', result);
         this.dataSource.data  = result;
         this.loadProducts$.next(false);
       })
@@ -58,7 +57,6 @@ export class ManageProductsComponent implements OnInit, AfterViewInit {
   }
 
   showImage(bImage:string){
-    console.log('imagesdsd', bImage);
     this.viewImage = bImage;
     this.currentDialog = this.dialog.open(this.image,{
       height:'auto'
@@ -73,12 +71,12 @@ export class ManageProductsComponent implements OnInit, AfterViewInit {
 
     this.currentDialog.afterClosed().subscribe((res:any)=>{
       if(res.isSave){
-        console.log('resresres', res);
-        this.actionService.saveProduct({
-          product_name:res.data.description, 
-          product_category: res.data.category,
-          price: res.data.price
-        }).pipe(
+        const formData: FormData = new FormData();
+        formData.append('product_name',res.data.description);
+        formData.append('product_category',res.data.category);
+        formData.append('price',res.data.price);
+        formData.append('product_image', res.data.image);
+        this.actionService.saveProduct(formData).pipe(
           tap(()=>{
             this.loadProducts$.next(true);
             this.commonService.showSuccess(`Product ${res.data.description} is saved`);
