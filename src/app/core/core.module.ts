@@ -22,6 +22,8 @@ import { ZXingScannerModule } from '@zxing/ngx-scanner';
 import { QrScanResultComponent } from './components/qr-scan-result/qr-scan-result.component';
 import { BreadcrumbComponent } from './components/breadcrumb/breadcrumb.component';
 import { RouterModule } from '@angular/router';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+
 @NgModule({
   declarations: [
     ProductCardComponent,
@@ -48,7 +50,8 @@ import { RouterModule } from '@angular/router';
     MatPaginatorModule,
     QRCodeModule,
     ZXingScannerModule,
-    RouterModule
+    RouterModule,
+    MatAutocompleteModule
   ],
   exports: [
     MatInputModule,
@@ -70,7 +73,8 @@ import { RouterModule } from '@angular/router';
     QRCodeModule,
     QrScannerComponent,
     ZXingScannerModule,
-    BreadcrumbComponent
+    BreadcrumbComponent,
+    MatAutocompleteModule
   ]
 })
 export class CoreModule { }

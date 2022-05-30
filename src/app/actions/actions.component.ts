@@ -12,7 +12,7 @@ export class ActionsComponent implements OnInit {
   list = [
     {id:1,name:'Accounts',icon:'manage_accounts', link:''},
     {id:2,name:'Categories',icon:'toll', link: '/manage-categories'},
-    {id:3,name:'Featured Products',icon:'star'},
+    {id:3,name:'Featured Products',icon:'star', link:'/manage-featured'},
     {id:4,name:'Products',icon:'lunch_dining', link: '/manage-products'}
   ]
   constructor(

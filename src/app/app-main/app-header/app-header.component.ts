@@ -113,5 +113,9 @@ export class AppHeaderComponent implements OnInit, AfterViewInit {
   }
 
 
+  manageFeatured(){
+    this.router.navigate(['/manage-featured']);
+  }
+
 
 }

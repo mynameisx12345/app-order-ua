@@ -22,4 +22,8 @@ export class ActionsService {
   saveCategory(data:any){
     return this.http.post(`${this.apiUrl}/api/items/saveCategory`, data);
   }
+
+  saveHotProduct(data:any){
+    return this.http.post(`${this.apiUrl}/api/items/addHotProduct`, data);
+  }
 }

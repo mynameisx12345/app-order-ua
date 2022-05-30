@@ -1,0 +1,21 @@
+<div class="w-100" fxLayout="column" fxLayoutGap="20px">
+  <span style="font-size:20px">Add Featured Products</span>
+  <div class="w-100" [formGroup]="formGroup">
+    <mat-form-field appearance="outline" class="w-100">
+      <mat-label>Enter Product</mat-label>
+      <input formControlName="searchResult" hidden="true">
+      <input matInput formControlName="searchString"
+        [matAutocomplete]="searchOptions">
+      <mat-autocomplete #searchOptions="matAutocomplete" (optionSelected)="optionsSelected($event)">
+        <mat-option *ngFor="let search of options$ | async" [value]="search.productId">
+          {{search.name}}
+        </mat-option>
+      </mat-autocomplete>
+    </mat-form-field>
+  </div>
+  <div class="w-100" fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="20px">
+    <button mat-raised-button color="accent" [disabled]="formGroup.invalid"
+      (click)="closeDialog(true,formGroup.value)">SAVE</button>
+    <button mat-button (click)="closeDialog(false,{})">Close</button>
+  </div>
+</div>

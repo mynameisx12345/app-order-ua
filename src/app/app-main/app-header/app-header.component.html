@@ -40,7 +40,7 @@
             Pay
         </button>
     </div>
-    <div fxLayout="column" style="padding:5px">
+    <div fxLayout="column" style="padding:5px" *ngIf="currentUser?.user_type === 'admin'">
         <span style="font-weight:bold; border-bottom:1px solid #ccc">Manage Application</span>
         <button mat-menu-item [matMenuTriggerFor]="maintenanceMenu">
             <mat-icon>backup_table</mat-icon>
@@ -59,7 +59,7 @@
       <button mat-menu-item (click)="manageCategories()">
           Categories
         </button>
-      <button mat-menu-item>
+      <button mat-menu-item (click)="manageFeatured()">
           Featured Products
         </button>
       <button mat-menu-item (click)="manageProudcts()">Products</button>

@@ -8,6 +8,8 @@ import { ManageProductsComponent } from './manage-products/manage-products.compo
 import { AddProductComponent } from './manage-products/add-product/add-product.component';
 import { ManageCategoriesComponent } from './manage-categories/manage-categories.component';
 import { AddCategoryComponent } from './manage-categories/add-category/add-category.component';
+import { ManageFeaturedComponent } from './manage-featured/manage-featured.component';
+import { AddFeaturedComponent } from './manage-featured/add-featured/add-featured.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +18,9 @@ import { AddCategoryComponent } from './manage-categories/add-category/add-categ
     ManageProductsComponent,
     AddProductComponent,
     ManageCategoriesComponent,
-    AddCategoryComponent
+    AddCategoryComponent,
+    ManageFeaturedComponent,
+    AddFeaturedComponent
   ],
   imports: [
     CommonModule,
