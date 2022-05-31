@@ -10,6 +10,8 @@ import { ManageCategoriesComponent } from './manage-categories/manage-categories
 import { AddCategoryComponent } from './manage-categories/add-category/add-category.component';
 import { ManageFeaturedComponent } from './manage-featured/manage-featured.component';
 import { AddFeaturedComponent } from './manage-featured/add-featured/add-featured.component';
+import { ManageAccountsComponent } from './manage-accounts/manage-accounts.component';
+import { AddAccountComponent } from './manage-accounts/add-account/add-account.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +22,9 @@ import { AddFeaturedComponent } from './manage-featured/add-featured/add-feature
     ManageCategoriesComponent,
     AddCategoryComponent,
     ManageFeaturedComponent,
-    AddFeaturedComponent
+    AddFeaturedComponent,
+    ManageAccountsComponent,
+    AddAccountComponent
   ],
   imports: [
     CommonModule,

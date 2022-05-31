@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
 export class ActionsComponent implements OnInit {
   @Input() currentValue = 1;
   list = [
-    {id:1,name:'Accounts',icon:'manage_accounts', link:''},
+    {id:1,name:'Accounts',icon:'manage_accounts', link:'/manage-accounts'},
     {id:2,name:'Categories',icon:'toll', link: '/manage-categories'},
     {id:3,name:'Featured Products',icon:'star', link:'/manage-featured'},
     {id:4,name:'Products',icon:'lunch_dining', link: '/manage-products'}

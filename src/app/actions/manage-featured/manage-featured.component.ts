@@ -1,5 +1,6 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { DomSanitizer } from '@angular/platform-browser';
 import { BehaviorSubject } from 'rxjs';
@@ -14,7 +15,8 @@ import { AddFeaturedComponent } from './add-featured/add-featured.component';
   templateUrl: './manage-featured.component.html',
   styleUrls: ['./manage-featured.component.scss']
 })
-export class ManageFeaturedComponent implements OnInit {
+export class ManageFeaturedComponent implements OnInit, AfterViewInit {
+  @ViewChild(MatPaginator) paginator: any;
   isMobile = this.commonService.isMobile;
   dataSource = new MatTableDataSource;
   displayedColumns = ['productId','name','price','image','action'];
@@ -55,6 +57,10 @@ export class ManageFeaturedComponent implements OnInit {
       })
     ).subscribe();
     this.loadHotProducts$.next(true);
+  }
+
+  ngAfterViewInit(): void {
+    this.dataSource.paginator = this.paginator;
   }
 
   showImage(bImage:string){

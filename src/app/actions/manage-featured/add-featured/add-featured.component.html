@@ -5,7 +5,7 @@
       <mat-label>Enter Product</mat-label>
       <input formControlName="searchResult" hidden="true">
       <input matInput formControlName="searchString"
-        [matAutocomplete]="searchOptions">
+        [matAutocomplete]="searchOptions" required>
       <mat-autocomplete #searchOptions="matAutocomplete" (optionSelected)="optionsSelected($event)">
         <mat-option *ngFor="let search of options$ | async" [value]="search.productId">
           {{search.name}}

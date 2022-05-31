@@ -8,7 +8,7 @@
       <span class="upper-link" (click)="openQueue()">QUEUE</span>
       <span class="upper-link" [matMenuTriggerFor]="actionsMenu"
         *ngIf="currentUser?.user_type === 'clerk' || currentUser?.user_type === 'admin'">ACTIONS</span>
-      <span class="upper-link" *ngIf="!(logged$ | async)">SIGN UP</span>
+      <!-- <span class="upper-link" *ngIf="!(logged$ | async)">SIGN UP</span> -->
       <span class="upper-link" (click)="login()" *ngIf="!(logged$ | async)">LOG IN</span>
       <span class="upper-link" [matMenuTriggerFor]="accountMenu"
         *ngIf="(logged$ | async)">{{currentUser.first_name}} {{currentUser.last_name}}</span>
@@ -53,7 +53,7 @@
     </div>
   </mat-menu>
   <mat-menu #maintenanceMenu="matMenu">
-      <button mat-menu-item>
+      <button mat-menu-item (click)="manageAccounts()">
           Accounts
         </button>
       <button mat-menu-item (click)="manageCategories()">
