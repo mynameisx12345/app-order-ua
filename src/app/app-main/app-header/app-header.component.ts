@@ -90,8 +90,12 @@ export class AppHeaderComponent implements OnInit, AfterViewInit {
     this.currentDialog = this.dialog.open(QrScannerComponent,{});
   }
   
-  jumpToQrCode(){
+  serveQr(){
     window.open(`${this.qrUrl}?action=S`,'_self');
+  }
+
+  payQr(){
+    window.open(`${this.qrUrl}?action=P`,'_self');
   }
 
   logout(){

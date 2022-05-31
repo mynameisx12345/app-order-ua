@@ -1,7 +1,7 @@
 
 <div  class="header" fxLayout="column">
   <div fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="15px">
-      <span fxLayout="row" fxLayoutAlign="center center" class="upper-link">
+      <span fxLayout="row" fxLayoutAlign="center center" class="upper-link" *ngIf="false">
           <mat-icon style="font-size:20px">notifications</mat-icon>
           NOTIFICATIONS
       </span>
@@ -31,11 +31,11 @@
   <mat-menu #actionsMenu="matMenu">
     <div fxLayout="column" style="padding:5px">
         <span style="font-weight:bold; border-bottom:1px solid #ccc">Process Orders</span>
-        <button mat-menu-item (click)="jumpToQrCode()">
+        <button mat-menu-item (click)="serveQr()">
             <mat-icon>qr_code_scanner</mat-icon>
             Serve
         </button>
-        <button mat-menu-item>
+        <button mat-menu-item (click)="payQr()">
             <mat-icon>qr_code_scanner</mat-icon>
             Pay
         </button>

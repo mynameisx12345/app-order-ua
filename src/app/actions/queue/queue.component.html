@@ -7,7 +7,7 @@
 <div class="w-100">
   <div *ngFor="let queue of queue$ | async; let i=index" class="queue"
     [ngClass]="{'queue-on':i<5, 'queue-off': i>4}"
-    [style.border] = "queue.user_id === (currentUser$ | async).id ? '5px solid rgb(13, 196, 13)' : '0px'"
+    [style.border] = "queue?.user_id === (currentUser$ | async)?.id ? '5px solid rgb(13, 196, 13)' : '0px'"
     fxLayout="row" fxLayoutAlign="start center">
     <mat-icon>inbox</mat-icon>&nbsp; Order: {{queue.id}} // Php {{queue.total}} - {{queue.first_name}}
   </div>

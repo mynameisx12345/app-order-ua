@@ -23,13 +23,15 @@ import { QrScanResultComponent } from './components/qr-scan-result/qr-scan-resul
 import { BreadcrumbComponent } from './components/breadcrumb/breadcrumb.component';
 import { RouterModule } from '@angular/router';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { PaymentComponent } from './components/qr-scan-result/payment/payment.component';
 
 @NgModule({
   declarations: [
     ProductCardComponent,
     QrScannerComponent,
     QrScanResultComponent,
-    BreadcrumbComponent
+    BreadcrumbComponent,
+    PaymentComponent
   ],
   imports: [
     CommonModule,

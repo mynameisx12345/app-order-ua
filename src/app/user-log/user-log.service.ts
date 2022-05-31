@@ -50,10 +50,9 @@ export class UserLogService {
     
   }
 
-  getOdersDetailed(userId:any):any{
-    return this.http.get(`${this.apiUrl}/api/orders/getOrdersDetailed?userId=${userId}`).pipe(
+  getOdersDetailed(param:any):any{
+    return this.http.get(`${this.apiUrl}/api/orders/getOrdersDetailed?${param}`).pipe(
       map((orders:any)=>{
-        console.log('ordersfresh', orders)
         orders.forEach((order:any)=>{
           order.productFilters = '';
           order.products.forEach((product:any)=>{
@@ -80,7 +79,6 @@ export class UserLogService {
               break;
           }
         });
-        console.log('ordresffff', orders);
         
         return orders;
       })
