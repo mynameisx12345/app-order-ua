@@ -10,10 +10,12 @@
 
   .products{
     .product{
-      border: 1px solid #ddd;
+      background: white;
+      //border: 1px solid #ddd;
       height: 170px;
       width: 150px;
       cursor: pointer;
+      margin:2px;
     }
 
     .product:hover{

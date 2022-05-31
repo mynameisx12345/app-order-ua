@@ -1,9 +1,9 @@
 .products{
-  height:290px;
-  width:178px;
+  height:240px;
+  width:158px;
   background: white;
   padding:5px;
-  margin: 5px;
+  margin: 3px;
   border-radius:5px;
   overflow: hidden;
   position: relative;
@@ -28,13 +28,16 @@
     position:absolute; 
     top: 0; 
     right: 0; 
-    background: orange; 
+    background: rgb(179, 177, 173); 
     height: auto;
-    width: 70px; 
-    opacity: 70%;
+    width: 60px; 
+    //opacity: 70%;
     visibility: hidden;
     border-bottom-left-radius: 10px;
     overflow: hidden;
+    mat-icon{
+      font-size:22px;
+    }
   }
 
   .shop-button{

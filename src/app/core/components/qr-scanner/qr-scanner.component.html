@@ -1,4 +1,7 @@
-{{qrValue}}
-<zxing-scanner #scanner
-  (scanSuccess)="handleQrCodeResult($event)">
-</zxing-scanner>
+<div [ngClass]="{'serving':action==='S','done': qrValue.length > 0}" fxLayout="column">
+ 
+  <div fxFlex="20px" style="font-style:bold;"> YOU ARE SERVING {{qrValue}}</div>
+  <zxing-scanner #scanner
+    (scanSuccess)="handleQrCodeResult($event)">
+  </zxing-scanner>
+</div>

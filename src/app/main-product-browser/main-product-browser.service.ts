@@ -46,8 +46,8 @@ export class MainProductBrowserService {
           hotProdFormatted.push({
             productId:hot.id, 
             name: hot.product_name, 
-            img: this.sanitizer.bypassSecurityTrustResourceUrl('data:image/jpg;base64,' 
-              + hot.product_image),
+            img: hot.product_image ? this.sanitizer.bypassSecurityTrustResourceUrl('data:image/jpg;base64,' 
+              + hot.product_image) : hot.product_image,
             price: hot.cur_price_a
           });
         });

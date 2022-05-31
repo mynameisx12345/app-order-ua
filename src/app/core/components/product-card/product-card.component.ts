@@ -21,6 +21,9 @@ export class ProductCardComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    if(!!this.product.img === false){
+      this.product.img = '../../../../../assets//images/default.jpg'
+    }
   }
 
   addToCart(){
