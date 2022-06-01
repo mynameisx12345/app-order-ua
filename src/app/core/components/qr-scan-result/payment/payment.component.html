@@ -1,0 +1,57 @@
+<div class="w-100" fxLayout="column" fxLayoutGap="50px" fxLayoutAlign="center center"
+*ngIf="!!orderDetails">
+  <div class="w-100" fxLayout="column" fxLayoutGap="20px" fxLayoutAlign="center center">
+    <div fxLayout="row" fxLayoutGap="10px" style="font-size:20px">
+      <span>Order Number {{orderDetails.id}}</span>
+    </div>
+    <div fxLayout="column" fxLayoutGap="10px">
+      <span>Total Amount</span>
+      <span style="color:orange; font-size: 30px">
+        Php {{orderDetails.total}}
+      </span>
+  
+    </div>
+    <div class="view-details" (click)="openDetails()">
+      View Details
+    </div>
+
+    <div *ngIf="serveStatus" class="paid">
+      PAID
+    </div>
+  </div>
+  
+  <div class="w-100" fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="30px">
+    <button mat-raised-button color="accent" (click)="confirmPayment()" *ngIf="!serveStatus">PAY NOW</button>
+    <button mat-button (click)="payQr()" *ngIf="!serveStatus">Cancel</button>
+    <button mat-raised-button color="accent" (click)="payQr()" *ngIf="serveStatus">NEXT PAYMENT</button>
+  </div>
+</div>
+
+<ng-template #details>
+  <div class="w-100" fxLayout="column" fxLayoutGap="50px">
+    <div fxLayout="column">
+      <div *ngFor="let product of orderDetails.products" fxLayout="row">
+        <div fxFlex="60" fxLayout="row">{{product.product_name}} @{{product.quantity}}</div>
+        <div fxFlex="40" fxLayout="row" fxLayoutAlign="end end">Php {{getProductTotal(product)}}</div>
+      </div>
+      
+    </div>
+    <div fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="5px" class="w-100">
+
+      <button mat-button  (click)="currentDialog.close()"
+        >Close</button>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #confirmBox>
+  <div class="w-100" fxLayout="column" fxLayoutGap="50px">
+    <span>
+      Confirm Payment
+    </span>
+    <div fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="5px" class="w-100">
+      <button mat-raised-button color="accent" (click)="pay()">YES</button>
+      <button mat-button  (click)="currentDialog.close()">No</button>
+    </div>
+  </div>
+</ng-template>

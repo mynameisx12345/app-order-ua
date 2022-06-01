@@ -16,12 +16,12 @@ export class MyOrdersComponent implements OnInit, AfterViewInit {
   @ViewChild(MatPaginator) paginator: any;
 
   loadOrders$ = new BehaviorSubject(false);
-  displayedColumns = ['menu','status','id','sub_total','discount','total','products'];
+  displayedColumns = ['menu','status','id','amount','products'];
   dataSource = new MatTableDataSource;
   orders$:any = this.loadOrders$.pipe(
     filter(load=>load),
     withLatestFrom(this.userService.currentUser$),
-    switchMap(([load, user])=>this.userService.getOdersDetailed(user.id)),
+    switchMap(([load, user])=>this.userService.getOdersDetailed(`userId=${user.id}`)),
     tap((orders:any)=>{
       this.dataSource.data = orders;
     })
@@ -85,6 +85,20 @@ export class MyOrdersComponent implements OnInit, AfterViewInit {
 
   cancel(){
     this.userService.updateOrderStatus({id:this.selectedOrderId, status:'X'}).subscribe();
+  }
+
+  generateQrData(qrData:any){
+    let code = '';
+    switch(qrData.status){
+      case 'On Queue':
+        code = 'Q';
+        break;
+      case 'Serving':
+        code = 'S';
+        break;
+    }
+
+    return `${code}${qrData.id}`;
   }
 
 

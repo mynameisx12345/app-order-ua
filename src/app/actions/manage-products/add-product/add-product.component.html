@@ -4,22 +4,24 @@
   <div class="w-100" [formGroup]="formGroup">
     <mat-form-field appearance="outline" class="w-100">
         <mat-label>Description</mat-label>
-        <input matInput formControlName="description">
+        <input matInput formControlName="description" required>
       </mat-form-field>
       <mat-form-field appearance="outline" class="w-100">
         <mat-label>Category</mat-label>
-        <mat-select matInput formControlName="category">
+        <mat-select matInput formControlName="category" required>
           <mat-option *ngFor="let cat of categories$ | async" [value]="cat.id">{{cat.name}}</mat-option>
         </mat-select>
       </mat-form-field>
       <mat-form-field appearance="outline" class="w-100">
         <mat-label>Current Price</mat-label>
-        <input matInput formControlName="price">
+        <input matInput formControlName="price" required>
       </mat-form-field>
       <mat-form-field appearance="outline" class="w-100">
         <mat-label>Image</mat-label>
-        <input matInput>
-        <button mat-button matSuffix>
+        <input matInput [value]="fileToUpload?.name" readonly>
+        <input type="file" #file accept="image/*" hidden="true" 
+          (change)="handleFileInput($event)">
+        <button mat-button matSuffix (click)="file.click()">
           <mat-icon>photo_camera</mat-icon>
         </button>
       </mat-form-field>

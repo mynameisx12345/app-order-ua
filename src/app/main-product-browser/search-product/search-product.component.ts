@@ -32,7 +32,6 @@ export class SearchProductComponent implements OnInit {
     this.searchResult$.subscribe();
     this.route.queryParams.subscribe((params:any)=>{
       this.searchString = params.searchString;
-      console.log('serachsdf', this.searchString,  this.loadSearch$.value)
       
       this.loadSearch$.next(true);
     });

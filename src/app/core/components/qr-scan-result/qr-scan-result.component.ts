@@ -17,6 +17,9 @@ export class QrScanResultComponent implements OnInit, AfterViewInit {
   actionMessage = '';
   qrUrl = environment.qrUrl;
   serveStatus:any = null;
+  code = '';
+  isInvalid:any = null;
+  
   constructor(
     private readonly route: ActivatedRoute,
     private readonly userService: UserLogService,
@@ -31,14 +34,23 @@ export class QrScanResultComponent implements OnInit, AfterViewInit {
   ngAfterViewInit(): void {
     this.route.queryParams.subscribe((params:any)=>{
       if(params.hasOwnProperty('qrValue')){
-        this.qrValue = params.qrValue;
+        this.qrValue = params.qrValue.substr(1,params.qrValue.length-1);
+        this.code = params.qrValue.substr(0,1);
         this.action = params.action;
+        this.isInvalid = this.code === this.action;
         switch(this.action){
           case 'S':
             this.actionMessage = 'Served';
+            if(!this.isInvalid){
+              this.updateNow(false);
+            }
+            break;
+          case 'P':
+            this.actionMessage = 'Paid';
             break;
         }
-        this.updateNow(false);
+        
+        
       }
       
     })
@@ -63,7 +75,7 @@ export class QrScanResultComponent implements OnInit, AfterViewInit {
     });
   }
 
-  jumpToQrCode(){
+  serveQr(){
     window.open(`${this.qrUrl}?action=S`,'_self');
   }
 

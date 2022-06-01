@@ -1,12 +1,16 @@
 .products{
-  height:290px;
-  width:178px;
+  height:240px;
+  width:165px;
   background: white;
-  padding:5px;
-  margin: 5px;
+  padding:3px;
+  margin: 3px;
   border-radius:5px;
   overflow: hidden;
   position: relative;
+  img{
+    widtH: 100%;
+    height: 168px;
+  }
 
   .title{
     word-wrap: break-word;
@@ -28,13 +32,16 @@
     position:absolute; 
     top: 0; 
     right: 0; 
-    background: orange; 
+    background: rgb(179, 177, 173); 
     height: auto;
-    width: 70px; 
-    opacity: 70%;
+    width: 60px; 
+    //opacity: 70%;
     visibility: hidden;
     border-bottom-left-radius: 10px;
     overflow: hidden;
+    mat-icon{
+      font-size:22px;
+    }
   }
 
   .shop-button{
@@ -47,6 +54,72 @@
 }
 
 .products:hover {
+  box-shadow: rgba(0, 0, 0, 0.22) 0px 15px 15px;
+  transform: translate3d(0px, -1px, 0px);
+
+  .toolbar{
+    visibility: visible;
+  }
+}
+
+.products-xs{
+  height:216px;
+  width:150px;
+  background: white;
+  padding:3px;
+  margin: 3px;
+  border-radius:5px;
+  overflow: hidden;
+  position: relative;
+  img{
+    widtH: 100%;
+    height: 151px;
+  }
+
+  .title{
+    word-wrap: break-word;
+    max-height: 75px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    font-size:12px;
+    line-height:1.2;
+  }
+
+  .price{
+    color: orange;
+    font-size: 15px;
+  }
+
+  .toolbar{
+    position:absolute; 
+    top: 0; 
+    right: 0; 
+    background: rgb(179, 177, 173); 
+    height: auto;
+    width: 60px; 
+    //opacity: 70%;
+    visibility: hidden;
+    border-bottom-left-radius: 10px;
+    overflow: hidden;
+    mat-icon{
+      font-size:22px;
+    }
+  }
+
+  .shop-button{
+    position:absolute; 
+    bottom:0; 
+    right: 0; 
+    cursor: pointer;
+    border-top-left-radius: 5px;
+  }
+}
+
+.products-xs:hover {
   box-shadow: rgba(0, 0, 0, 0.22) 0px 15px 15px;
   transform: translate3d(0px, -1px, 0px);
 

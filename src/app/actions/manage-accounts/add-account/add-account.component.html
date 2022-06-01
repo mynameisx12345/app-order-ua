@@ -1,0 +1,38 @@
+<div class="w-100" fxLayout="column" fxLayoutGap="20px">
+  <span style="font-size:20px">Add User Account</span>
+  <div class="w-100" [formGroup]="formGroup">
+    <mat-form-field appearance="outline" class="w-100">
+      <mat-label>Email</mat-label>
+      <input matInput formControlName="email" required>
+    </mat-form-field>
+    <mat-form-field appearance="outline" class="w-100">
+      <mat-label>Password</mat-label>
+      <input matInput type="password" formControlName="password" required>
+    </mat-form-field>
+    <mat-form-field appearance="outline" class="w-100">
+      <mat-label>Firstname</mat-label>
+      <input matInput formControlName="firstname" required>
+    </mat-form-field>
+    <mat-form-field appearance="outline" class="w-100">
+      <mat-label>Middlename</mat-label>
+      <input matInput formControlName="middlename">
+    </mat-form-field>
+    <mat-form-field appearance="outline" class="w-100">
+      <mat-label>Lastname</mat-label>
+      <input matInput formControlName="lastname" required>
+    </mat-form-field>
+    <mat-form-field appearance="outline" class="w-100">
+      <mat-label>User Type</mat-label>
+      <mat-select matInput formControlName="userType" required>
+        <mat-option *ngFor="let type of userTypes" [value]="type.value">
+          {{type.label}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+  <div class="w-100" fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="20px">
+    <button mat-raised-button color="accent" [disabled]="formGroup.invalid"
+      (click)="closeDialog(true,formGroup.value)">SAVE</button>
+    <button mat-button (click)="closeDialog(false,{})">Close</button>
+  </div>
+</div>

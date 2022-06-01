@@ -21,19 +21,16 @@ export class QrScannerComponent implements OnInit, AfterViewInit {
   ngOnInit(): void {
     this.route.queryParams.subscribe((param:any)=>{
       this.action = param.action;
-      console.log('ction1231', this.action);
     });
   }
 
   ngAfterViewInit(): void {
     this.scanner.camerasFound.subscribe((res:any)=>{
-      console.log('camerafound', res);
     })
   }
 
   handleQrCodeResult(resultString: string) {
     this.qrValue = resultString;
-    console.log('qrresult', resultString);
     window.open(`${this.uiUrl}/qr-result?qrValue=${this.qrValue}&action=${this.action}`,'_self');
   }
 }

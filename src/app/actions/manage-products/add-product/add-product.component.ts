@@ -13,6 +13,7 @@ export class AddProductComponent implements OnInit {
   categories$ = this.mainService.getProductCategories();
   isMobile = this.commonService.isMobile;
   formGroup:any;
+  fileToUpload: File | null = null;
   constructor(
     private readonly mainService: MainProductBrowserService,
     private readonly commonService: CommonService,
@@ -22,7 +23,8 @@ export class AddProductComponent implements OnInit {
     this.formGroup = this.fb.group({
       description: ['', Validators.required],
       category: ['', Validators.required],
-      price: ['', [Validators.required, Validators.pattern(/^[.\d]+$/)]]
+      price: ['', [Validators.required, Validators.pattern(/^[.\d]+$/)]],
+      image: ['']
     })
   }
 
@@ -31,6 +33,12 @@ export class AddProductComponent implements OnInit {
 
   closeDialog(isSave:boolean, data:{}){
     this.dialogRef.close({isSave: isSave, data:data});
+  }
+
+  handleFileInput(files: any) {
+    const file = files.target.files;
+    this.fileToUpload = file.item(0);
+    this.formGroup.patchValue({image: this.fileToUpload});
   }
 
 }

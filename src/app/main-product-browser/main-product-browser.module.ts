@@ -10,6 +10,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { MainProductBrowserRoutingModule } from './main-product-browser-routing.module';
 import { ProductCategoriesModule } from '../product-categories/product-categories.module';
 import { SearchProductComponent } from './search-product/search-product.component';
+import { ProductComponent } from './product/product.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { SearchProductComponent } from './search-product/search-product.componen
     HotTodayComponent,
     MyFavoritesComponent,
     DisplayCategoriesComponent,
-    SearchProductComponent
+    SearchProductComponent,
+    ProductComponent
   ],
   imports: [
     CommonModule,

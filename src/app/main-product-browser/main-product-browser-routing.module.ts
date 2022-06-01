@@ -8,7 +8,7 @@ import { SearchProductComponent } from './search-product/search-product.componen
 const routes: Routes = [
   {path: '', canActivate: [GuardService], component: MainProductBrowserComponent, data: {breadcrumb:'Home'}, 
     children: []},
-  {path: 'search-products', canActivate: [GuardService], component:SearchProductComponent, data: {breadcrumb: 'Products Search Result'} }
+  {path: 'search-products',component:SearchProductComponent, data: {breadcrumb: 'Products Search Result'} }
 ];
 
 
