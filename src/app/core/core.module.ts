@@ -22,12 +22,18 @@ import { ZXingScannerModule } from '@zxing/ngx-scanner';
 import { QrScanResultComponent } from './components/qr-scan-result/qr-scan-result.component';
 import { BreadcrumbComponent } from './components/breadcrumb/breadcrumb.component';
 import { RouterModule } from '@angular/router';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { PaymentComponent } from './components/qr-scan-result/payment/payment.component';
+import { MatSortModule } from '@angular/material/sort';
+import { NgxHideOnScrollModule } from 'ngx-hide-on-scroll';
+
 @NgModule({
   declarations: [
     ProductCardComponent,
     QrScannerComponent,
     QrScanResultComponent,
-    BreadcrumbComponent
+    BreadcrumbComponent,
+    PaymentComponent
   ],
   imports: [
     CommonModule,
@@ -48,7 +54,10 @@ import { RouterModule } from '@angular/router';
     MatPaginatorModule,
     QRCodeModule,
     ZXingScannerModule,
-    RouterModule
+    RouterModule,
+    MatAutocompleteModule,
+    MatSortModule,
+    NgxHideOnScrollModule
   ],
   exports: [
     MatInputModule,
@@ -70,7 +79,10 @@ import { RouterModule } from '@angular/router';
     QRCodeModule,
     QrScannerComponent,
     ZXingScannerModule,
-    BreadcrumbComponent
+    BreadcrumbComponent,
+    MatAutocompleteModule,
+    MatSortModule,
+    NgxHideOnScrollModule
   ]
 })
 export class CoreModule { }

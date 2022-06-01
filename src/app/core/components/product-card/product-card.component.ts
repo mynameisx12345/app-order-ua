@@ -13,6 +13,7 @@ import { CommonService } from '../../services/common.service';
 })
 export class ProductCardComponent implements OnInit {
   @Input() product!: Products;
+  isMobile = this.commonService.isMobile;
   constructor(
     private readonly userService: UserLogService,
     private readonly router: Router,
@@ -21,6 +22,9 @@ export class ProductCardComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    if(!!this.product.img === false){
+      this.product.img = '../../../../../assets//images/default.jpg'
+    }
   }
 
   addToCart(){

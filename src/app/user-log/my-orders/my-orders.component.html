@@ -1,4 +1,4 @@
-<div fxLayout="row">
+<div fxLayout="row" fxLayoutGap="10px">
   <app-account-info fxFlex="20" *ngIf="!isMobile" [currentValue]="2"></app-account-info>
   <div fxFlex="80" fxFlex.xs="100" class="orders-body">
     <mat-form-field appearance="standard">
@@ -9,12 +9,14 @@
       <ng-container matColumnDef="menu">
         <th mat-header-cell *matHeaderCellDef></th>
         <td mat-cell *matCellDef="let element">
-          <button mat-button [matMenuTriggerFor]="actionsMenu">
+          <button mat-button [matMenuTriggerFor]="actionsMenu"
+           style=" width: 20px !important;
+          min-width: unset!important; padding-right: 30px !important">
             <mat-icon>more_vert</mat-icon>
           </button>
           <mat-menu #actionsMenu="matMenu">
             <button mat-menu-item (click)="viewQr(element)"
-              [disabled]="element['status'] === 'Paid' || element['status'] === 'Serving' || element['status'] === 'Cancelled'">
+              [disabled]="element['status'] === 'Paid' || element['status'] === 'Cancelled'">
               View QR
             </button>
             <button mat-menu-item (click)="cancelOrder(element.id)"
@@ -44,7 +46,19 @@
           {{element.id}}
         </td>
       </ng-container>
-      <ng-container matColumnDef="sub_total">
+      <ng-container matColumnDef="amount">
+        <th mat-header-cell *matHeaderCellDef>Amount</th>
+        <td mat-cell *matCellDef="let element">
+          <div fxLayout="column" fxLayoutGap="5px">
+            <div *ngIf="element['discount'] > 0">PHp {{element['sub_total']}}</div>
+            <div *ngIf="element['discount']> 0">Php ({{element['discount']}})</div>
+            <span style="font-size:17px; color:orange">
+              Php {{element.total}}
+            </span>
+          </div>
+        </td>
+      </ng-container>
+      <!-- <ng-container matColumnDef="sub_total">
         <th mat-header-cell *matHeaderCellDef>Sub Total</th>
         <td mat-cell *matCellDef="let element">
           Php {{element.sub_total}}
@@ -64,7 +78,7 @@
           </span>
           
         </td>
-      </ng-container>
+      </ng-container> -->
       <ng-container matColumnDef="products">
         <th mat-header-cell *matHeaderCellDef>Products</th>
         <td mat-cell *matCellDef="let element">
@@ -97,7 +111,7 @@
 
 <ng-template #qrWindow>
   <div>
-    <qrcode [qrdata]="qrData.id" [width]="256" [errorCorrectionLevel]="'M'"></qrcode>
+    <qrcode [qrdata]="generateQrData(qrData)" [width]="256" [errorCorrectionLevel]="'M'"></qrcode>
   </div>
 </ng-template>
 

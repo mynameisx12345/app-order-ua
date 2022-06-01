@@ -7,6 +7,10 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     width:100%
 }
 
+.w-95{
+    width:95%
+}
+
 .w-80{
     width:80%
 }
@@ -29,4 +33,8 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 .font-weight-bold{
     font-weight: bold;
+}
+
+.body-height{
+    min-height: 500px;
 }

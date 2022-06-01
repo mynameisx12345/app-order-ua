@@ -11,21 +11,6 @@ import { MainProductBrowserService } from '../main-product-browser.service';
   styleUrls: ['./display-categories.component.scss']
 })
 export class DisplayCategoriesComponent implements OnInit {
-  categories = [
-    {img: '#', name: 'Category'},
-    {img: '#', name: 'Category'},
-    {img: '#', name: 'Category'},
-    {img: '#', name: 'Category'},
-    {img: '#', name: 'Category'},
-    {img: '#', name: 'Category'},
-    {img: '#', name: 'Category'},
-    {img: '#', name: 'Category'},
-    {img: '#', name: 'Category'},
-    {img: '#', name: 'Category'},
-    {img: '#', name: 'Category'},
-    {img: '#', name: 'Category'},
-    {img: '#', name: 'Category'},
-  ]
 
   loadCategories$ = new BehaviorSubject(false);
   categories$ = this.loadCategories$.pipe(
@@ -46,8 +31,11 @@ export class DisplayCategoriesComponent implements OnInit {
   }
 
   goToCategory(categoryId:number){
-    console.log('categoryid', categoryId);
     this.router.navigate(['/product-categories'],{queryParams:{id:categoryId}});
+  }
+
+  showImage(image:any){
+    return !!image === false ? '../../../assets//images/default.jpg' : image;
   }
 
 }

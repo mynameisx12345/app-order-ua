@@ -1,14 +1,18 @@
 
 <div  class="header" fxLayout="column">
+  <div class="w-100 logo" *ngIf="isMobile"
+    ngxHideOnScroll [classNameWhenHidden]="'nav--hidden'">
+    <img src="../../../assets//images/logo_3.png" style="width:auto; height:30px">
+  </div>
   <div fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="15px">
-      <span fxLayout="row" fxLayoutAlign="center center" class="upper-link">
+      <span fxLayout="row" fxLayoutAlign="center center" class="upper-link" *ngIf="false">
           <mat-icon style="font-size:20px">notifications</mat-icon>
           NOTIFICATIONS
       </span>
       <span class="upper-link" (click)="openQueue()">QUEUE</span>
       <span class="upper-link" [matMenuTriggerFor]="actionsMenu"
         *ngIf="currentUser?.user_type === 'clerk' || currentUser?.user_type === 'admin'">ACTIONS</span>
-      <span class="upper-link" *ngIf="!(logged$ | async)">SIGN UP</span>
+      <!-- <span class="upper-link" *ngIf="!(logged$ | async)">SIGN UP</span> -->
       <span class="upper-link" (click)="login()" *ngIf="!(logged$ | async)">LOG IN</span>
       <span class="upper-link" [matMenuTriggerFor]="accountMenu"
         *ngIf="(logged$ | async)">{{currentUser.first_name}} {{currentUser.last_name}}</span>
@@ -31,42 +35,49 @@
   <mat-menu #actionsMenu="matMenu">
     <div fxLayout="column" style="padding:5px">
         <span style="font-weight:bold; border-bottom:1px solid #ccc">Process Orders</span>
-        <button mat-menu-item (click)="jumpToQrCode()">
+        <button mat-menu-item (click)="serveQr()">
             <mat-icon>qr_code_scanner</mat-icon>
             Serve
         </button>
-        <button mat-menu-item>
+        <button mat-menu-item (click)="payQr()">
             <mat-icon>qr_code_scanner</mat-icon>
             Pay
         </button>
     </div>
-    <div fxLayout="column" style="padding:5px">
+    <div fxLayout="column" style="padding:5px" *ngIf="currentUser?.user_type === 'admin'">
         <span style="font-weight:bold; border-bottom:1px solid #ccc">Manage Application</span>
         <button mat-menu-item [matMenuTriggerFor]="maintenanceMenu">
             <mat-icon>backup_table</mat-icon>
             Maintenance
         </button>
-        <button mat-menu-item>
+        <!-- <button mat-menu-item>
             <mat-icon>settings</mat-icon>
             Settings
-        </button>
+        </button> -->
+    </div>
+    <div fxLayout="column" style="padding:5px">
+      <span style="font-weight:bold; border-bottom:1px solid #ccc">Reports</span>
+      <button mat-menu-item (click)="reportDailySales()">
+          <mat-icon>trending_up</mat-icon>
+          Daily Sales
+      </button>
     </div>
   </mat-menu>
   <mat-menu #maintenanceMenu="matMenu">
-      <button mat-menu-item>
+      <button mat-menu-item (click)="manageAccounts()">
           Accounts
         </button>
-      <button mat-menu-item>
+      <button mat-menu-item (click)="manageCategories()">
           Categories
         </button>
-      <button mat-menu-item>
+      <button mat-menu-item (click)="manageFeatured()">
           Featured Products
         </button>
       <button mat-menu-item (click)="manageProudcts()">Products</button>
   </mat-menu>
   <div class="w-100" fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="10px">
-      <div fxFlex="20%">
-        <img src="../../../assets//images/logo.png" style="width:100%; height:100%">
+      <div fxFlex="20%" *ngIf="!isMobile">
+        <img src="../../../assets//images/logo_3.png" style="width:100%; height:100%">
       </div>
       <div fxFlex="70%">
           <mat-form-field appearance="outline" class="w-100">

@@ -1,8 +1,8 @@
 
 <div class="w-100 position-relative" fxLayout="column" fxLayoutAlign="center center" style="background: #f1f1f1">
-  <div class="position-relative" [ngClass]="isMobile ? 'w-100' : 'w-60'" fxLayout="column" fxLayoutAlign="center center">
-    <app-app-header [ngClass]="isMobile ? 'w-100' : 'w-60'" *ngIf="!isQrUrl"></app-app-header>
-     <div class="app-body w-100">
+  <div class="position-relative" [ngClass]="isMobile ? 'w-95' : 'w-60'" fxLayout="column" fxLayoutAlign="center center">
+    <app-app-header [ngClass]="isMobile ? 'w-95' : 'w-60'" *ngIf="!isQrUrl"></app-app-header>
+     <div class="app-body w-100 body-height">
       <router-outlet></router-outlet>
      </div>
     
