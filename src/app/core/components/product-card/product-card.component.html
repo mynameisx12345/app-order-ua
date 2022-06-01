@@ -1,5 +1,5 @@
-<div fxLayout="column" class="products">
-  <img [src]="product.img" width="100%" height="168px">
+<div fxLayout="column" [ngClass]="isMobile ? 'products-xs' : 'products'">
+  <img [src]="product.img">
   <div fxLayout="column" class="position-relative">
     <span class="title">{{product.name}}</span>
     <span class="price">Php {{product.price}}</span>

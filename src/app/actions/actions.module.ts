@@ -12,6 +12,7 @@ import { ManageFeaturedComponent } from './manage-featured/manage-featured.compo
 import { AddFeaturedComponent } from './manage-featured/add-featured/add-featured.component';
 import { ManageAccountsComponent } from './manage-accounts/manage-accounts.component';
 import { AddAccountComponent } from './manage-accounts/add-account/add-account.component';
+import { DailySalesComponent } from './reports/daily-sales/daily-sales.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { AddAccountComponent } from './manage-accounts/add-account/add-account.c
     ManageFeaturedComponent,
     AddFeaturedComponent,
     ManageAccountsComponent,
-    AddAccountComponent
+    AddAccountComponent,
+    DailySalesComponent
   ],
   imports: [
     CommonModule,

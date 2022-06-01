@@ -3,11 +3,13 @@ import { Routes, RouterModule } from '@angular/router';
 import { QrScannerComponent} from './core/components/qr-scanner/qr-scanner.component'
 import { QrScanResultComponent } from './core/components/qr-scan-result/qr-scan-result.component';
 import { GuardService } from './core/services/guard.service';
+import { GuardRoleService } from './core/services/guard-role.service';
+
 const routes: Routes = [
   {path: '', canActivate: [GuardService], redirectTo: '/home', pathMatch: 'full'},
   //{path: '**', redirectTo: '/home', pathMatch: 'full'},
   {path: 'qr-scan', component:QrScannerComponent},
-  {path: 'qr-result',canActivate: [GuardService], component:QrScanResultComponent, data: {breadcrumb:'QR Scan Result'}},
+  {path: 'qr-result',canActivate: [GuardService, GuardRoleService], component:QrScanResultComponent, data: {breadcrumb:'QR Scan Result'}},
   {path: 'home', loadChildren: ()=> import('./main-product-browser/main-product-browser.module').then(m=>m.MainProductBrowserModule)},
   {path: 'categories', canActivate: [GuardService], loadChildren: ()=> import('./product-categories/product-categories.module').then(m=>m.ProductCategoriesModule)},
   {path: 'user', canActivate: [GuardService], loadChildren: ()=> import('./user-log/user-log.module').then(m=>m.UserLogModule)},

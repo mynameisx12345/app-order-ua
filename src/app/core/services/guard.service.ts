@@ -16,7 +16,6 @@ export class GuardService implements CanActivate {
   ) { }
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean | UrlTree | Observable<boolean | UrlTree> | Promise<boolean | UrlTree> {
-    console.log('guardactivated',state.url)
     if(this.cacheService.loadLocal('userInfo') || state.url === '/home'){
       this.userService.login({}).subscribe();
       return true;

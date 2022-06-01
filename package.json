@@ -30,6 +30,7 @@
     "angular2-qrscanner": "^1.0.7",
     "angularx-qrcode": "^11.0.0",
     "ngx-device-detector": "^2.0.4",
+    "ngx-hide-on-scroll": "^0.2.1",
     "rxjs": "~6.6.0",
     "tslib": "^2.0.0",
     "zone.js": "~0.10.2"

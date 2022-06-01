@@ -1,6 +1,32 @@
 <div class="footer" fxLayout="row" fxLayoutAlign="center start">
-  <div class="w-60">
-    Footer Information
+  <div [ngClass]="isMobile ? 'w-95' : 'w-60'" fxLayout="row" fxLayout.xs="column"
+    fxLayoutGap="10px">
+    <div fxFlex="30" fxLayout="column"  fxLayoutGap="10px">
+      <span class="message-header">
+        SCHOOL CANTEEN ORDERING SYSTEM (CanteenOS)
+      </span>
+      <span>
+        {{message}}
+      </span>
+      <div fxLayout="row">
+        <img src="../../../assets/images/logo_4.png" width="auto" height="70px">
+      </div>
+    </div>
+   
+      <mat-divider [vertical]="!isMobile" [inset]="true"> </mat-divider>
+   
+    
+    <div fxFlex="30" fxLayout="column" fxLayoutGap="10px" style="padding-left:50px"> 
+      <span class="message-header">DEV TEAM</span>
+      <span *ngFor="let dev of devTeam">{{dev}}</span>
+    </div>
+    <div>
+      <mat-divider [vertical]="!isMobile" [inset]="true"> </mat-divider>
+    </div>
+    
+    <div>
+      <img src="../../../assets/images/ua_logo.png" height="150px" width="auto">
+    </div>
   </div>
   
 </div>

@@ -50,4 +50,8 @@ export class ActionsService {
   addUser(data:any){
     return this.http.post(`${this.apiUrl}/api/users/addUser`, data);
   }
+
+  getDailySalesReport(){
+    return this.http.get(`${this.apiUrl}/api/reports/reportDailySales`);
+  }
 }

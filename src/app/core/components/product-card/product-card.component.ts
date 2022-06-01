@@ -13,6 +13,7 @@ import { CommonService } from '../../services/common.service';
 })
 export class ProductCardComponent implements OnInit {
   @Input() product!: Products;
+  isMobile = this.commonService.isMobile;
   constructor(
     private readonly userService: UserLogService,
     private readonly router: Router,

@@ -9,6 +9,7 @@ import { QueueComponent } from './../../actions/queue/queue.component';
 import { ZXingScannerComponent } from '@zxing/ngx-scanner';
 import { QrScannerComponent } from './../../core/components/qr-scanner/qr-scanner.component'
 import { environment } from 'src/environments/environment';
+import { CommonService } from 'src/app/core/services/common.service';
 @Component({
   selector: 'app-app-header',
   templateUrl: './app-header.component.html',
@@ -24,11 +25,13 @@ export class AppHeaderComponent implements OnInit, AfterViewInit {
   //@ViewChild(QrScannerComponent, { static: true }) qrScannerComponent:any;
   qrUrl = environment.qrUrl;
   currentUrl:any;
+  isMobile = this.commonService.isMobile;
   constructor(
     private readonly router:Router,
     private readonly userService: UserLogService,
     private readonly shoppingCart: CartService,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private readonly commonService: CommonService
   ) { 
     this.router.events
           .subscribe(
@@ -123,6 +126,10 @@ export class AppHeaderComponent implements OnInit, AfterViewInit {
 
   manageAccounts(){
     this.router.navigate(['/manage-accounts']);
+  }
+
+  reportDailySales(){
+    this.router.navigate(['/reports/daily-sales'])
   }
 
 

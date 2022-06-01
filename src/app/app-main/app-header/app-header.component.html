@@ -1,5 +1,9 @@
 
 <div  class="header" fxLayout="column">
+  <div class="w-100 logo" *ngIf="isMobile"
+    ngxHideOnScroll [classNameWhenHidden]="'nav--hidden'">
+    <img src="../../../assets//images/logo_3.png" style="width:auto; height:30px">
+  </div>
   <div fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="15px">
       <span fxLayout="row" fxLayoutAlign="center center" class="upper-link" *ngIf="false">
           <mat-icon style="font-size:20px">notifications</mat-icon>
@@ -51,6 +55,13 @@
             Settings
         </button> -->
     </div>
+    <div fxLayout="column" style="padding:5px">
+      <span style="font-weight:bold; border-bottom:1px solid #ccc">Reports</span>
+      <button mat-menu-item (click)="reportDailySales()">
+          <mat-icon>trending_up</mat-icon>
+          Daily Sales
+      </button>
+    </div>
   </mat-menu>
   <mat-menu #maintenanceMenu="matMenu">
       <button mat-menu-item (click)="manageAccounts()">
@@ -65,8 +76,8 @@
       <button mat-menu-item (click)="manageProudcts()">Products</button>
   </mat-menu>
   <div class="w-100" fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="10px">
-      <div fxFlex="20%">
-        <img src="../../../assets//images/logo_2.png" style="width:100%; height:100%">
+      <div fxFlex="20%" *ngIf="!isMobile">
+        <img src="../../../assets//images/logo_3.png" style="width:100%; height:100%">
       </div>
       <div fxFlex="70%">
           <mat-form-field appearance="outline" class="w-100">
