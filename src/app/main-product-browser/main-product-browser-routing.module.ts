@@ -4,11 +4,14 @@ import { Routes, RouterModule } from '@angular/router';
 import { MainProductBrowserComponent } from './main-product-browser.component';
 import { GuardService } from '../core/services/guard.service';
 import { SearchProductComponent } from './search-product/search-product.component';
+import { ProductComponent } from './product/product.component';
+import { GuardRoleService } from '../core/services/guard-role.service';
 
 const routes: Routes = [
-  {path: '', canActivate: [GuardService], component: MainProductBrowserComponent, data: {breadcrumb:'Home'}, 
+  {path: '', component: MainProductBrowserComponent, data: {breadcrumb:'Home'}, 
     children: []},
-  {path: 'search-products',component:SearchProductComponent, data: {breadcrumb: 'Products Search Result'} }
+  {path: 'search-products',component:SearchProductComponent, data: {breadcrumb: 'Products Search Result'} },
+  {path: 'product', component: ProductComponent, data: {breadcrumb: 'Product'}}
 ];
 
 

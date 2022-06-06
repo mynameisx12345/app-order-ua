@@ -1,16 +1,23 @@
 <div fxLayout="column" [ngClass]="isMobile ? 'products-xs' : 'products'">
-  <img [src]="product.img">
+  <img [src]="_product.img">
   <div fxLayout="column" class="position-relative">
-    <span class="title">{{product.name}}</span>
-    <span class="price">Php {{product.price}}</span>
+    <span class="title">{{_product.name}}</span>
+    <span class="price">Php {{_product.price}}</span>
+    <div fxLayout="row" fxLayoutGap="5px" fxLayoutAlign="start center">
+      <div class="sold-today" *ngIf="soldToday$ | async as soldToday">{{soldToday}} Sold Today</div>
+      <div class="sold-today" *ngIf="_product?.likes?.length > 0" fxLayout="row" fxLayoutAlign="center center">
+            <mat-icon style="font-size: 13px; width:15px; height: 15px"
+              [color]="favIcon === 'favorite' ? 'warn' : null">{{favIcon}}</mat-icon>{{_product?.likes.length}}
+      </div>
+    </div>
     
   </div>
   <div class="toolbar" fxLayout="column">
-    <button mat-button>
+    <button mat-button (click)="openProduct()">
       <mat-icon>search</mat-icon>
     </button>
-    <button mat-button>
-      <mat-icon>favorite_outline</mat-icon>
+    <button mat-button (click)="like()" [disabled]="likeLoading">
+      <mat-icon [color]="favIcon === 'favorite' ? 'warn' : null">{{favIcon}}</mat-icon>
     </button>
     
     
@@ -18,4 +25,5 @@
   <div class="shop-button" (click)="addToCart()">
     <mat-icon color="primary" style="font-size:25px">add_shopping_cart</mat-icon>
   </div>
+  
 </div>

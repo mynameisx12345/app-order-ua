@@ -1,0 +1,22 @@
+.product{
+  .content{
+    padding:10px;
+    .title{
+      font-size: 20px;
+    }
+    .price{
+      color: orange;
+      font-size: 30px;
+      margin-top:20px;
+      margin-bottom: 20px;
+    }
+
+    .sold-today{
+      color: rgb(97, 96, 96);
+      margin-top: 10px;
+    }
+
+   
+  }
+  
+}

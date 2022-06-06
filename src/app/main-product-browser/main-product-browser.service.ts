@@ -38,7 +38,7 @@ export class MainProductBrowserService {
   }
 
   getProducts(param:string): Observable<any>{
-    return this.http.get(`${this.apiUrl}/api/items/products?${param}`).pipe(
+    return this.http.get(`${this.apiUrl}/api/items/getProducts?${param}`).pipe(
       map((hotProd:any)=>{
         let hotProdFormatted: Products[] =[];
   
@@ -48,7 +48,8 @@ export class MainProductBrowserService {
             name: hot.product_name, 
             img: hot.product_image ? this.sanitizer.bypassSecurityTrustResourceUrl('data:image/jpg;base64,' 
               + hot.product_image) : hot.product_image,
-            price: hot.cur_price_a
+            price: hot.cur_price_a,
+            likes: hot.likes
           });
         });
   
@@ -69,7 +70,8 @@ export class MainProductBrowserService {
             img: res.product_image ? this.sanitizer.bypassSecurityTrustResourceUrl('data:image/jpg;base64,' 
               + res.product_image) : res.product_image,
             price: res.cur_price_a,
-            category: res.category_name
+            category: res.category_name,
+            likes: res.likes
 
           });
         });
@@ -78,6 +80,23 @@ export class MainProductBrowserService {
       })
     )
   }
+
+  getSoldTodayCount(productId:any){
+    return this.http.get(`${this.apiUrl}/api/items/getSoldToday?productId=${productId}`).pipe(
+      map((sold:any)=>{
+        if(sold.length > 0){
+          return sold[0].quantity;
+        } else {
+          return '';
+        }
+      }))
+    
+  }
+
+  like(data:any){
+    return this.http.post(`${this.apiUrl}/api/items/like`, data);
+  }
+
 }
 
 export interface Category{
@@ -92,7 +111,8 @@ interface Products {
   name?: string,
   img?: any,
   price?: string,
-  category?: string
+  category?: string,
+  likes?: any
 }
 
 
