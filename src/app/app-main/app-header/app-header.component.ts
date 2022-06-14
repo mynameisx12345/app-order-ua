@@ -38,13 +38,11 @@ export class AppHeaderComponent implements OnInit, AfterViewInit {
             (event: any) => {
               if(event instanceof NavigationStart) {
                this.currentUrl = event.url;
-               console.log('curUrl', this.currentUrl)
               }
             });
   }
 
   ngOnInit(): void {
-    console.log('urlasd', this.currentUrl)
     this.userService.currentUser$.subscribe(res=>{
       this.currentUser = res;
     });

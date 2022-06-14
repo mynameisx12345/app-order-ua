@@ -16,7 +16,7 @@ import { MainProductBrowserService } from '../main-product-browser.service';
 })
 export class ProductComponent implements OnInit {
   loadProduct$ = new BehaviorSubject(false);
-  favIcon = 'favorite';
+  favIcon = 'favorite_border';
   likeLoading = false;
   
   product$ = this.loadProduct$.pipe(
@@ -33,7 +33,7 @@ export class ProductComponent implements OnInit {
           product.price = Number(product.price).toFixed(2);
           if(!!product.likes){
             product.likes = [...new Set(product.likes.split(', '))];
-            let userIdIndex = product.likes.findIndex((like:any)=>like === this.userService.currentUser$.value.id);
+            let userIdIndex = product.likes.findIndex((like:any)=>like === this.userService.currentUser$?.value?.id);
             if(userIdIndex > -1) {
               this.favIcon = 'favorite';
             } else {
@@ -92,6 +92,10 @@ export class ProductComponent implements OnInit {
   }
 
   like(product:any){
+    if(!this.userService.logged.value){
+      this.router.navigate(['/log-in']);
+      return
+    }
     this.likeLoading = true;
     if(this.favIcon === 'favorite_border'){
       this.favIcon = 'favorite'

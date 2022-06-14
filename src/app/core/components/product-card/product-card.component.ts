@@ -19,7 +19,7 @@ export class ProductCardComponent implements OnInit {
       this.soldToday$ = this.mainService.getSoldTodayCount(this._product?.productId);
       if(!!this._product.likes){
         this._product.likes = [... new Set(this._product.likes.split(', '))];
-        let userIdIndex = this._product.likes.find((like:any)=>like === this.userService.currentUser$.value.id);
+        let userIdIndex = this._product.likes.find((like:any)=>like === this.userService.currentUser$?.value?.id);
         if(userIdIndex > -1){
           this.favIcon ='favorite';
         }
@@ -77,6 +77,10 @@ export class ProductCardComponent implements OnInit {
   }
 
   like(){
+    if(!this.userService.logged.value){
+      this.router.navigate(['/log-in']);
+      return
+    }
     this.likeLoading = true;
     if(this.favIcon === 'favorite_border'){
       this.favIcon = 'favorite'
