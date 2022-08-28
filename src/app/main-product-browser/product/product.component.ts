@@ -1,3 +1,4 @@
+import { createOfflineCompileUrlResolver } from '@angular/compiler';
 import { parseI18nMeta } from '@angular/compiler/src/render3/view/i18n/meta';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
@@ -18,6 +19,21 @@ export class ProductComponent implements OnInit {
   loadProduct$ = new BehaviorSubject(false);
   favIcon = 'favorite_border';
   likeLoading = false;
+  isCommentLoaded = false;
+  loadComment$ = new BehaviorSubject(false);
+  productId = null;
+
+  comments$ = this.loadComment$.pipe(
+    filter(load=>load),
+    withLatestFrom(this.route.queryParams),
+    switchMap(([load,param])=>this.mainService.getComments(param.id)),
+    tap((comments)=>{
+      console.log('commentsasdfas', comments)
+      this.loadComment$.next(false);
+      
+    })
+    
+  )
   
   product$ = this.loadProduct$.pipe(
     filter(load=>load),
@@ -28,6 +44,7 @@ export class ProductComponent implements OnInit {
     }),
     withLatestFrom(this.route.queryParams),
     map(([products, param])=>{
+      this.productId = param.id;
       if(products.length > 0){
         return products.filter((product:any)=>product.productId===param.id ).map((product:any)=>{
           product.price = Number(product.price).toFixed(2);
@@ -51,6 +68,7 @@ export class ProductComponent implements OnInit {
     }),
     tap((product)=>{
       this.soldToday$ = this.mainService.getSoldTodayCount(product.productId);
+      this.loadComment$.next(true);
     })
   );
 
@@ -118,6 +136,38 @@ export class ProductComponent implements OnInit {
     ).subscribe();
   }
 
+  addComment(message:any){
+    let data = {
+      message: message,
+      user_id: this.userService.currentUser$.value.id,
+      product_id: this.productId
+    };
+
+    this.mainService.addComment(data).pipe(
+      tap(()=>{
+        this.commonService.showSuccess('Comment Added');
+        this.loadComment$.next(true);
+      })
+    ).subscribe();
+  }
+
+  removeComment(message:any){
+    this.mainService.removeComment(message).pipe(
+      tap(()=>{
+        this.commonService.showSuccess('Comment Removed');
+        this.loadComment$.next(true);
+      })
+    ).subscribe();
+  }
+
+  editComment(message:any){
+    this.mainService.editComment(message).pipe(
+      tap(()=>{
+        this.commonService.showSuccess('Comment Changed');
+        this.loadComment$.next(true);
+      })
+    ).subscribe();
+  }
   
 
 }

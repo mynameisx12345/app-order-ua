@@ -1,34 +1,40 @@
-<div fxLayout="row" fxLayout.xs="column" *ngIf="product$ | async as product" class="w-100 product" fxLayoutGap="15px">
-  <div fxFlex="40" *ngIf="!!product?.img">
-    <img [src]="product?.img" height="auto" width="100%">
-  </div>
-  <div fxFlex="60" fxLayout="column" class="content">
-    <div class="title">{{product?.name}}</div>
-    <div fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="start center">
-      <div *ngIf="soldToday$ | async as soldToday" class="sold-today">{{soldToday}} Sold Today</div>
-      <div *ngIf="product?.likes.length > 0" class="sold-today" fxLayout="row" fxLayoutAlign="center center">
-        <mat-icon style="font-size: 17px; width: 19px; height: 20px"
-        [color]="favIcon === 'favorite' ? 'warn' : null">{{favIcon}}</mat-icon>{{product?.likes.length}}
+<div fxLayout="column" class="w-100">
+  <div fxLayout="row" fxLayout.xs="column" *ngIf="product$ | async as product" class="w-100 product" fxLayoutGap="15px">
+    <div fxFlex="40" *ngIf="!!product?.img">
+      <img [src]="product?.img" height="auto" width="100%">
+    </div>
+    <div fxFlex="60" fxLayout="column" class="content">
+      <div class="title">{{product?.name}}</div>
+      <div fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="start center">
+        <div *ngIf="soldToday$ | async as soldToday" class="sold-today">{{soldToday}} Sold Today</div>
+        <div *ngIf="product?.likes.length > 0" class="sold-today" fxLayout="row" fxLayoutAlign="center center">
+          <mat-icon style="font-size: 17px; width: 19px; height: 20px"
+          [color]="favIcon === 'favorite' ? 'warn' : null">{{favIcon}}</mat-icon>{{product?.likes.length}}
+        </div>
       </div>
-    </div>
-    
-    <div class="price">Php {{product?.price}}</div>
-    <div fxLayout="row" fxLayoutAlign="start center">
-      <mat-form-field appearance="outline" fxFlex="40">
-        <mat-label>Enter Quantity</mat-label>
-        <input matInput style="font-size:15px" [formControl]="quantity" type="number">
-      </mat-form-field>
-      <div fxFlex="60">
-        
+      
+      <div class="price">Php {{product?.price}}</div>
+      <div fxLayout="row" fxLayoutAlign="start center">
+        <mat-form-field appearance="outline" fxFlex="40">
+          <mat-label>Enter Quantity</mat-label>
+          <input matInput style="font-size:15px" [formControl]="quantity" type="number">
+        </mat-form-field>
+        <div fxFlex="60">
+          
+        </div>
       </div>
+      <div>
+        <button mat-raised-button color="primary" (click)="addToCart(product)"><mat-icon>add_shopping_cart</mat-icon> ADD TO CART</button>
+        <button mat-button (click)="like(product)">
+          <mat-icon [color]="favIcon === 'favorite' ? 'warn' : null">{{favIcon}}</mat-icon>
+          LIKE
+        </button>
+      </div>
+      
     </div>
-    <div>
-      <button mat-raised-button color="primary" (click)="addToCart(product)"><mat-icon>add_shopping_cart</mat-icon> ADD TO CART</button>
-      <button mat-button (click)="like(product)">
-        <mat-icon [color]="favIcon === 'favorite' ? 'warn' : null">{{favIcon}}</mat-icon>
-        LIKE
-      </button>
-    </div>
-    
   </div>
+  <app-comment [comments]="comments$ | async" 
+    (addCommentSrc)="addComment($event)"
+    (removeCommentSrc)="removeComment($event)"
+    (editCommentSrc)="editComment($event)"></app-comment>
 </div>

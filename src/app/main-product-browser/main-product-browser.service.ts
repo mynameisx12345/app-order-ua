@@ -97,6 +97,32 @@ export class MainProductBrowserService {
     return this.http.post(`${this.apiUrl}/api/items/like`, data);
   }
 
+  getComments(productId:any){
+    return this.http.get(`${this.apiUrl}/api/items/getComments?productId=${productId}`).pipe(
+      map((comments:any)=>{
+       return  comments.map((comment:any)=>{
+          comment.isRead = true;
+          comment.user = `${comment.first_name} ${comment.last_name}`;
+          comment.originalMessage = comment.message;
+          comment.dtModified = comment.dt_modified;
+          return comment;
+        });
+      })
+    );
+  }
+
+  addComment(comment:any){
+    return this.http.post(`${this.apiUrl}/api/items/addComment`,comment);
+  }
+
+  removeComment(comment:any){
+    return this.http.post(`${this.apiUrl}/api/items/removeComment`,comment);
+  }
+
+  editComment(comment:any){
+    return this.http.post(`${this.apiUrl}/api/items/editComment`,comment);
+  }
+
 }
 
 export interface Category{
