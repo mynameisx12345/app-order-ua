@@ -1,6 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { filter, switchMap, tap } from 'rxjs/operators';
+import { CommonService } from 'src/app/core/services/common.service';
 import { UserLogService } from 'src/app/user-log/user-log.service';
 import { ActionsService } from '../actions.service';
 
@@ -23,7 +24,8 @@ export class QueueComponent implements OnInit, OnDestroy {
   )
   constructor(
     private readonly actionsService: ActionsService,
-    private readonly userService: UserLogService
+    private readonly userService: UserLogService,
+    private readonly commonService: CommonService
   ) { }
 
   ngOnInit(): void {
@@ -35,6 +37,15 @@ export class QueueComponent implements OnInit, OnDestroy {
   }
   ngOnDestroy(): void {
     clearInterval(this.queueInterVal);
+  }
+
+  cancelOrder(id:any){
+    this.userService.updateOrderStatus({id:id, status:'X'}).pipe(
+      tap(()=>{
+        this.commonService.showSuccess(`Order ${id} is cancelled`);
+        this.loadQueue$.next(true);
+      })
+    ).subscribe();
   }
 
 }

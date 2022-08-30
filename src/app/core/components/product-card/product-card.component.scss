@@ -19,13 +19,18 @@
     text-overflow: ellipsis;
     text-overflow: ellipsis;
     display: -webkit-box;
-    -webkit-line-clamp: 3;
+    -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
   }
 
   .price{
     color: orange;
     font-size: 15px;
+  }
+
+  .sold-today{
+    font-size:10px;
+    color: rgb(105, 103, 103);
   }
 
   .toolbar{
@@ -83,7 +88,7 @@
     text-overflow: ellipsis;
     text-overflow: ellipsis;
     display: -webkit-box;
-    -webkit-line-clamp: 3;
+    -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
     font-size:12px;
     line-height:1.2;
@@ -92,6 +97,10 @@
   .price{
     color: orange;
     font-size: 15px;
+  }
+
+  .sold-today{
+    font-size:10px;
   }
 
   .toolbar{

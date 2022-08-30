@@ -45,7 +45,6 @@ export class CartService {
         return cart;
       }),
       tap((cart:any)=>{
-        console.log('cartest', cart)
         this.cart$.next(cart);
       })
     );

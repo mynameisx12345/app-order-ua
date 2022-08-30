@@ -26,6 +26,9 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { PaymentComponent } from './components/qr-scan-result/payment/payment.component';
 import { MatSortModule } from '@angular/material/sort';
 import { NgxHideOnScrollModule } from 'ngx-hide-on-scroll';
+import { CommentComponent } from './components/comment/comment.component';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -33,7 +36,8 @@ import { NgxHideOnScrollModule } from 'ngx-hide-on-scroll';
     QrScannerComponent,
     QrScanResultComponent,
     BreadcrumbComponent,
-    PaymentComponent
+    PaymentComponent,
+    CommentComponent
   ],
   imports: [
     CommonModule,
@@ -57,7 +61,9 @@ import { NgxHideOnScrollModule } from 'ngx-hide-on-scroll';
     RouterModule,
     MatAutocompleteModule,
     MatSortModule,
-    NgxHideOnScrollModule
+    NgxHideOnScrollModule,
+    MatTooltipModule,
+    FormsModule
   ],
   exports: [
     MatInputModule,
@@ -82,7 +88,10 @@ import { NgxHideOnScrollModule } from 'ngx-hide-on-scroll';
     BreadcrumbComponent,
     MatAutocompleteModule,
     MatSortModule,
-    NgxHideOnScrollModule
+    NgxHideOnScrollModule,
+    CommentComponent,
+    MatTooltipModule,
+    FormsModule
   ]
 })
 export class CoreModule { }

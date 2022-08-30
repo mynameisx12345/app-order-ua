@@ -5,12 +5,14 @@ import { UserLogRoutingModule } from './user-log-routing.module';
 import { CoreModule } from './../core/core.module';
 import { AccountInfoComponent } from './account-info/account-info.component';
 import { MyOrdersComponent } from './my-orders/my-orders.component';
+import { UserDetailComponent } from './user-detail/user-detail.component';
 
 @NgModule({
   declarations: [
     UserLogComponent,
     AccountInfoComponent,
-    MyOrdersComponent
+    MyOrdersComponent,
+    UserDetailComponent
   ],
   imports: [
     CommonModule,

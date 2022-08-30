@@ -26,7 +26,6 @@ export class BreadcrumbComponent implements OnInit {
   ).subscribe(() => {
       this.breadcrumbs = [{label:'Home', url:'/home'}];
       this.breadcrumbs = [...this.breadcrumbs,...this.buildBreadCrumb(this.activatedRoute.root)];
-      console.log('breadcrumbs', this.breadcrumbs);
     })
   }
 
