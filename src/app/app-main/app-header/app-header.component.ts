@@ -64,6 +64,10 @@ export class AppHeaderComponent implements OnInit, AfterViewInit {
     this.router.navigate(['/user/log-in']);
   }
 
+  signup(){
+    this.router.navigate(['/sign-up']);
+  }
+
   viewCart(){
     if(!this.userService.logged.value){
       this.router.navigate(['/log-in']);

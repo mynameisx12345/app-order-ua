@@ -45,13 +45,31 @@
           {{element.userType}}
         </td>
       </ng-container>
+      <ng-container matColumnDef="isApproved">
+        <th mat-header-cell *matHeaderCellDef>Approved?</th>
+        <td mat-cell *matCellDef="let element">
+          {{element.isApproved}}
+          <!-- <mat-icon *ngIf="element.isApproved">check</mat-icon>
+          <mat-icon *ngIf="!element.isApproved">close</mat-icon> -->
+        </td>
+      </ng-container>
       <ng-container matColumnDef="action">
         <th mat-header-cell *matHeaderCellDef></th>
         <td mat-cell *matCellDef="let element">
           <button mat-button style=" width: 15px !important;
-            min-width: unset!important;">
+            min-width: unset!important;"
+            [matMenuTriggerFor]="menu">
             <mat-icon>more_vert</mat-icon>
           </button>
+          <mat-menu #menu="matMenu">
+            <button mat-menu-item *ngIf="!element.isApproved"
+              (click)="approveAccount(element)">
+              Approve Account
+            </button>
+            <button mat-menu-item (click)="updateAccount(element)">
+              Edit
+            </button>
+          </mat-menu>
         </td>
       </ng-container>
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
@@ -61,5 +79,7 @@
                  showFirstLastButtons>
     </mat-paginator>
   </div>
+
+  
   
 </div>

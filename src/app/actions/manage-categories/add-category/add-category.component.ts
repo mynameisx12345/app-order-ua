@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { MatDialogRef } from '@angular/material/dialog';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-add-category',
@@ -12,11 +12,16 @@ export class AddCategoryComponent implements OnInit {
   fileToUpload: File | null = null;
   constructor(
     private readonly dialogRef: MatDialogRef<AddCategoryComponent>,
-    private readonly fb: FormBuilder
+    private readonly fb: FormBuilder,
+    @Inject(MAT_DIALOG_DATA) data:any
   ) { 
     this.formGroup = this.fb.group({
       name: ['', Validators.required],
       image: ['']
+    });
+
+    this.formGroup.patchValue({
+      ...data.value
     })
   }
 

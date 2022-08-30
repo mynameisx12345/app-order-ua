@@ -2,8 +2,8 @@ import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
-import { BehaviorSubject } from 'rxjs';
-import { filter, switchMap, tap } from 'rxjs/operators';
+import { BehaviorSubject, throwError } from 'rxjs';
+import { catchError, filter, switchMap, tap } from 'rxjs/operators';
 import { CommonService } from 'src/app/core/services/common.service';
 import { MainProductBrowserService } from 'src/app/main-product-browser/main-product-browser.service';
 import { ActionsService } from '../actions.service';
@@ -64,7 +64,11 @@ export class ManageCategoriesComponent implements OnInit, AfterViewInit {
   addCategory(){
     this.currentDialog = this.dialog.open(AddCategoryComponent,{
       disableClose: true,
-      width: this.isMobile ? '80%' : '30%'
+      width: this.isMobile ? '80%' : '30%',
+      data: {
+        mode:'add',
+        value: {}
+      }
     });
 
     this.currentDialog.afterClosed().subscribe((res:any)=>{
@@ -80,6 +84,34 @@ export class ManageCategoriesComponent implements OnInit, AfterViewInit {
         ).subscribe();
       }
     })
+  }
+
+  editCategory(category:any){
+    console.log('category', category);
+    this.currentDialog = this.dialog.open(AddCategoryComponent,{
+      disableClose: true,
+      width: this.isMobile ? '80%' : '30%',
+      data: {
+        mode:'add',
+        value: {
+          name: category.name,
+          image: category.img
+        }
+      }
+    });
+  }
+
+  removeCategory(id:any){
+    this.actionService.removeCategory(id).pipe(
+      catchError(error=>{
+        this.commonService.showError('Cannot remove. Category is being used.');
+        return throwError(error);
+      }),
+      tap(()=>{
+        this.commonService.showSuccess('Removed Successfully');
+        this.loadCategories$.next(true);
+      })
+    ).subscribe();
   }
 
 }
