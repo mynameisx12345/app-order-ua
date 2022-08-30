@@ -10,7 +10,7 @@ const routes: Routes = [
   //{path: '**', redirectTo: '/home', pathMatch: 'full'},
   {path: 'qr-scan', component:QrScannerComponent},
   {path: 'qr-result',canActivate: [GuardService, GuardRoleService], component:QrScanResultComponent, data: {breadcrumb:'QR Scan Result'}},
-  {path: 'home', loadChildren: ()=> import('./main-product-browser/main-product-browser.module').then(m=>m.MainProductBrowserModule)},
+  {path: 'home', canActivate: [GuardService],  loadChildren: ()=> import('./main-product-browser/main-product-browser.module').then(m=>m.MainProductBrowserModule)},
   {path: 'categories', canActivate: [GuardService], loadChildren: ()=> import('./product-categories/product-categories.module').then(m=>m.ProductCategoriesModule)},
   {path: 'user', canActivate: [GuardService], loadChildren: ()=> import('./user-log/user-log.module').then(m=>m.UserLogModule)},
   {path: 'cart', canActivate: [GuardService], loadChildren: ()=> import('./cart/cart.module').then(m=>m.CartModule)},

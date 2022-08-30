@@ -96,4 +96,13 @@ export class ManageFeaturedComponent implements OnInit, AfterViewInit {
     })
   }
 
+  removeHot(id:any){
+    this.actionService.removeHot(id).pipe(
+      tap(()=>{
+        this.commonService.showSuccess('Removed Successfully');
+        this.loadHotProducts$.next(true);
+      })
+    ).subscribe();
+  }
+
 }

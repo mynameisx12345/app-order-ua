@@ -26,7 +26,8 @@ export class HotTodayComponent implements OnInit {
           name: hot.product_name, 
           img: hot.product_image ? this.sanitizer.bypassSecurityTrustResourceUrl('data:image/jpg;base64,' 
             + hot.product_image) : hot.product_image,
-          price: hot.cur_price_a
+          price: hot.cur_price_a,
+          likes: hot.likes
         });
       });
 
@@ -52,5 +53,6 @@ interface Products {
   productId: string,
   name?: string,
   img?: any,
-  price?: string
+  price?: string,
+  likes?: any
 }

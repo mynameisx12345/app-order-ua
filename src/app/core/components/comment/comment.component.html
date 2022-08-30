@@ -1,0 +1,61 @@
+<div class="w-70 padding-20px" fxLayout="column">
+  <div fxLayout="column"  [@listAnimation]="comments?.length">
+    <div style="padding-bottom:10px">
+      Comments
+    </div>
+    <div *ngFor="let comment of comments; let i=index" class="comment" fxLayout="column">
+      <div fxLayout="row" fxLayoutAlign="start start">
+        <div fxFlex="95" fxLayout="column">
+          <div [innerHtml]="cleanString(comment?.message)" *ngIf="comment?.isRead"></div>
+         
+          <mat-form-field appearance="outline" class="w-100" *ngIf="!comment?.isRead">
+            <textarea matInput class="min-height" [(ngModel)]="comment.message"></textarea>
+          </mat-form-field> 
+          <div fxLayout="row" fxLayoutAlign="end end" class="user">
+            - {{comment?.user}} {{comment?.dtModified}}
+          </div>
+        </div>
+        <div fxLayout="column">
+          <button mat-button *ngIf="!comment?.isRead" color="primary" 
+          [disabled]="comment.message.trim().length === 0 || comment.message === comment.originalMessage"
+          (click)="editComment(comment)">
+          <mat-icon>check</mat-icon>
+        </button>
+        <button mat-button *ngIf="!comment?.isRead" color="warn" (click)="cancelComment(comment)">
+          <mat-icon>close</mat-icon>
+        </button>
+        <button mat-button [matMenuTriggerFor]="menu" fxFlex="5" *ngIf="comment?.isRead">
+          <mat-icon>more_vert</mat-icon>
+        </button>
+        
+        </div>
+        
+        <mat-menu #menu="matMenu">
+          <button mat-menu-item (click)="removeComment(comment)" *ngIf="canEdit(comment)">
+            <mat-icon>delete</mat-icon> Remove
+          </button>
+          <button mat-menu-item (click)="startEditComment(comment)" *ngIf="canEdit(comment)">
+            <mat-icon>edit</mat-icon> Edit
+          </button>
+          <button mat-menu-item matTooltip="Report Comment">
+            <mat-icon>report</mat-icon> Report
+          </button>
+        </mat-menu>
+      </div>
+      
+     
+    </div>
+  </div>
+  <div fxLayout="column" *ngIf="hasUserLogged">
+    <mat-form-field appearance="outline" class="w-100" >
+      <mat-label>Leave a comment...</mat-label>
+      <textarea matInput class="min-height" [formControl]="newComment"></textarea>
+    </mat-form-field> 
+    <div fxLayout="row" fxLayoutAlign="end center">
+      <div fxLayout="row" fxLayoutGap="30px">
+        <button mat-raised-button color="accent" (click)="addComment()" [disabled]="!newComment.value.trim()">Add Comment</button>
+      </div>
+    </div>
+  </div>
+  
+</div>

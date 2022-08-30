@@ -1,14 +1,22 @@
-<!-- <mat-selection-list [multiple]="false">
-  <mat-list-option *ngFor="let queue of queue$ | async" [value]="queue.id">
-    Order: {{queue.id}} // Php {{queue.total}} - {{queue.first_name}}
-  </mat-list-option>
-</mat-selection-list> -->
-
 <div class="w-100">
   <div *ngFor="let queue of queue$ | async; let i=index" class="queue"
     [ngClass]="{'queue-on':i<5, 'queue-off': i>4}"
-    [style.border] = "queue?.user_id === (currentUser$ | async)?.id ? '5px solid rgb(13, 196, 13)' : '0px'"
-    fxLayout="row" fxLayoutAlign="start center">
-    <mat-icon>inbox</mat-icon>&nbsp; Order: {{queue.id}} // Php {{queue.total}} - {{queue.first_name}}
+    [style.border] = "queue?.user_id === (currentUser$ | async)?.id ? '3px solid rgb(13, 196, 13)' : '0px'"
+    fxLayout="row" fxLayoutAlign="space-between center">
+    <div fxLayout="row" fxLayoutAlign="start center">
+      <mat-icon>inbox</mat-icon>&nbsp; Order: {{queue.id}} // Php {{queue.total}} - {{queue.first_name}}&nbsp;<span [style.color]="queue.color">({{queue.timeDiff}})</span>
+    </div>
+   <button mat-button [matMenuTriggerFor]="menu" 
+    *ngIf="(queue?.user_id === (currentUser$ | async)?.id) || 
+      ((currentUser$ | async)?.user_type === 'admin') ||
+      ((currentUser$ | async)?.user_type === 'clerk')">
+     <mat-icon>more_vert</mat-icon>
+   </button>
+
+   <mat-menu #menu="matMenu">
+     <button mat-menu-item (click)="cancelOrder(queue.id)">
+       Cancel
+     </button>
+   </mat-menu>
   </div>
 </div>
